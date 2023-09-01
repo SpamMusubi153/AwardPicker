@@ -2,14 +2,14 @@
 
 details {
     user-select: none;
-    backdrop-filter: brightness(85%);
-    border-radius: 10%;
+    /* backdrop-filter: brightness(85%); */
+    /* border-radius: 10%; */
     padding: 5px;
 }
 
 details summary span {
     transition: all 0.4s;
-    margin-left: 50%;
+    margin-right: 2%;
 }
 
 details[open] summary span {
