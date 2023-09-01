@@ -39,7 +39,6 @@ def main():
             pass
 
     print(spreadsheet)
-    
 
-main()
 
+document["spreadsheet_upload"].bind("onchange", main)

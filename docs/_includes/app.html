@@ -75,11 +75,11 @@
                         console.log("An error occurred while saving an item to local storage.");
                     }
 
-                    // Run the main app code.
-                    var script = document.createElement("script");
-                    script.setAttribute("type", "text/python")
-                    script.setAttribute("src", "/AwardPicker/main.py");
-                    app.appendChild(script);
+                    // // Run the main app code.
+                    // var script = document.createElement("script");
+                    // script.setAttribute("type", "text/python")
+                    // script.setAttribute("src", "/AwardPicker/main.py");
+                    // app.appendChild(script);
                     
                 }
 
@@ -90,7 +90,7 @@
         </script>
     </div>
 
-    <div id=app></div>
+    <script id=app type="text/python" src="/AwardPicker/main.py"></script>
 
 
 
