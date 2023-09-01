@@ -39,7 +39,5 @@ def main():
     print(spreadsheet)
     
 
-    
-
 main()
 

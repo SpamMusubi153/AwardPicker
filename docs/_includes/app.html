@@ -74,6 +74,10 @@
                         fileError("An unknown error occurred.", "Please reload the page and try again.");
                         console.log("An error occurred while saving an item to local storage.");
                     }
+
+                    // Run the main app code.
+                    app.type = "text/python"
+                    app.src = "/AwardPicker/main.py"
                 }
 
                 reader.readAsText(spreadsheet_upload.files[0])
@@ -83,7 +87,7 @@
         </script>
     </div>
 
-    <script type="text/python" src="/AwardPicker/main.py"></script>
+    <script id=app></script>
 
 
 
