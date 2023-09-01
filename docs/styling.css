@@ -9,7 +9,7 @@ details {
 
 details summary span {
     transition: all 0.4s;
-    margin-left: auto;
+    margin-left: 50%;
 }
 
 details[open] summary span {
