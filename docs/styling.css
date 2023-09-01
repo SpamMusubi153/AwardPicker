@@ -5,7 +5,7 @@ details {
     filter: brightness(85%);
 }
 
-details[open] summary {
+details[open] summary span {
     transform: rotate(180deg);
     transition: all 0.4s;
     margin-left: auto;
