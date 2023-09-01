@@ -76,7 +76,11 @@
                     }
 
                     // Run the main app code.
-                    document.getElementById("app").innerHTML = "<script type=\"text/python\" src=\"/AwardPicker/main.py\"></script>";
+                    var script = document.createElement("script");
+                    script.setAttribute("type", "text/python")
+                    script.setAttribute("src", "/AwardPicker/main.py");
+                    app.appendChild(script);
+                    
                 }
 
                 reader.readAsText(spreadsheet_upload.files[0])
