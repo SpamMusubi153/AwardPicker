@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="styling.css">
 
+## Upload a spreadsheet that contains the names of your 4-Star classes.
+
 #### Make sure that:
 
 - Each row contains a date and a class name, followed by the names of 4-Star classes.
