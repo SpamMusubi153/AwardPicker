@@ -1,0 +1,42 @@
+
+import base64
+import csv
+
+import time
+from datetime import datetime
+
+from browser import document
+from browser.local_storage import storage
+
+# Read the spreadsheet file from localstorage.
+
+SPREADSHEET_LOCALSTORAGE_KEY = "spreadsheet"
+
+def get_spreadsheet(localstorage_key):
+    encoded_spreadsheet = storage[localstorage_key]
+
+    assert (encoded_spreadsheet is not None), "The spreadsheet could be be retrieved."
+
+    spreadsheet = base64.b64decode(encoded_spreadsheet)
+
+    return spreadsheet
+
+
+def main():
+
+    # Wait for the spreadsheet to become accessible from localstorage.
+    spreadsheet = None
+    while True:
+        try:
+            spreadsheet = get_spreadsheet()
+            break
+        except:
+            time.sleep(1)
+
+    print(spreadsheet)
+    
+
+    
+
+main()
+
