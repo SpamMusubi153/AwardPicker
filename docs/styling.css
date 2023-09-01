@@ -5,10 +5,13 @@ details {
     filter: brightness(85%);
 }
 
-details[open] summary span {
-    transform: rotate(180deg);
+details summary span {
     transition: all 0.4s;
     margin-left: auto;
+}
+
+details[open] summary span {
+    transform: rotate(180deg);
 }
 
 summary {
