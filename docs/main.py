@@ -2,7 +2,6 @@
 import base64
 import csv
 
-import time
 from datetime import datetime
 
 from browser import document
@@ -35,7 +34,7 @@ def main():
             spreadsheet = get_spreadsheet()
             break
         except:
-            time.sleep(1)
+            pass
 
     print(spreadsheet)
     
