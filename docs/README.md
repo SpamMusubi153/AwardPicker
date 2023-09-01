@@ -17,7 +17,7 @@
 <ul>
   <li>Each row contains a date and a class name, followed by the names of 4-Star classes.</li>
   <li>The date is in the format MM/DD/YYYY HH:MM:SS, which is the format provided automatically by Google Forms.</li>
-  <li>Your spreadsheet is in the CSV (Comma Separated Values) Format</li>
+  <li>Your spreadsheet is in the CSV (Comma Separated Values) Format.</li>
 </ul>
 
 <h4 id="heres-an-example-of-what-your-spreadsheet-could-look-like">Here’s an example of what your spreadsheet could look like:</h4>
