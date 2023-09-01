@@ -27,6 +27,8 @@ def get_spreadsheet_reader(spreadsheet):
 
 def main():
 
+    print("Main program loaded.")
+
     # Wait for the spreadsheet to become accessible from localstorage.
     spreadsheet = None
     while True:
