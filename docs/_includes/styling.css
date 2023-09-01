@@ -2,6 +2,7 @@
 
 details {
     user-select: none;
+    filter: brightness(85%);
 }
 
 details[open] summary {
