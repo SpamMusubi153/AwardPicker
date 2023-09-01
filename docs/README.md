@@ -6,7 +6,6 @@
 
 </summary>
 
-<div>
 
 #### Make sure that:
 
@@ -24,6 +23,5 @@
         9/1/2023 9:19:43,Library,Wong,Light,Book
         ...
 
-</div>
 
 </details>
