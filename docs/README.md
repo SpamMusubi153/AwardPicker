@@ -1,20 +1,24 @@
 <link rel="stylesheet" href="styling.css">
 
-## Upload a spreadsheet that contains the names of your 4-Star classes.
+### Upload a spreadsheet that contains the names of your 4-Star classes.
 
-#### Make sure that:
-
-- Each row contains a date and a class name, followed by the names of 4-Star classes.
-- The date is in the format MM/DD/YYYY HH:MM:SS, which is the format provided automatically by Google Forms.
-- Your spreadsheet is in the CSV (Comma Separated Values) Format
 
 <details>
 
-<summary>Can I have an example?
-
 <span>🔽</span>
 
+<summary>Make sure that:
+
+
 </summary>
+
+<h4 id="make-sure-that">Make sure that:</h4>
+
+<ul>
+  <li>Each row contains a date and a class name, followed by the names of 4-Star classes.</li>
+  <li>The date is in the format MM/DD/YYYY HH:MM:SS, which is the format provided automatically by Google Forms.</li>
+  <li>Your spreadsheet is in the CSV (Comma Separated Values) Format</li>
+</ul>
 
 <h4 id="heres-an-example-of-what-your-spreadsheet-could-look-like">Here’s an example of what your spreadsheet could look like:</h4>
 
@@ -31,6 +35,12 @@
 
 
 
+
+<!-- #### Make sure that:
+
+- Each row contains a date and a class name, followed by the names of 4-Star classes.
+- The date is in the format MM/DD/YYYY HH:MM:SS, which is the format provided automatically by Google Forms.
+- Your spreadsheet is in the CSV (Comma Separated Values) Format -->
 
 
 
