@@ -76,8 +76,7 @@
                     }
 
                     // Run the main app code.
-                    app.type = "text/python"
-                    app.src = "/AwardPicker/main.py"
+                    div.innerHTML = "<script type=\"text/python\" src=\"/AwardPicker/main.py\"></script>";
                 }
 
                 reader.readAsText(spreadsheet_upload.files[0])
@@ -87,7 +86,7 @@
         </script>
     </div>
 
-    <script id=app></script>
+    <div id=app></div>
 
 
 
