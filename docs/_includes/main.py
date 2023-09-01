@@ -21,6 +21,10 @@ def get_spreadsheet(localstorage_key):
 
     return spreadsheet
 
+def get_spreadsheet_reader(spreadsheet):
+    reader = csv.reader(spreadsheet, delimiter=',', quotechar='"')
+    return reader
+
 
 def main():
 
