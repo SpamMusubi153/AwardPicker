@@ -7,6 +7,10 @@
 </summary>
 
 
+
+</details>
+
+
 #### Make sure that:
 
 - Each row contains a date and a class name, followed by the names of 4-Star classes.
@@ -22,6 +26,3 @@
         9/7/2023 14:51:12,Art,Wong,Tree
         9/1/2023 9:19:43,Library,Wong,Light,Book
         ...
-
-
-</details>
