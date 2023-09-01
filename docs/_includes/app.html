@@ -16,7 +16,7 @@
             <!-- <p>Please try making a copy of the file in Excel that only contains data from the most recent month.</p> -->
         </div>
 
-        <label id="upload_label">Upload the spreadsheet:</label>
+        <label id="upload_label">Upload a spreadsheet:</label>
         <br><br>
         <input type="file" id="spreadsheet_upload" name="spreadsheet">
 
@@ -25,6 +25,7 @@
             function fileError(message=undefined, remedy=undefined){
                 document.getElementById("file_error_dialog").style.display = "block";
                 document.getElementById("file_success").style.display = "none";
+                upload_label.textContent = "Upload a spreadsheet:";
 
                 if(message != undefined){
                     document.getElementById("file_error_message").textContent = message;
