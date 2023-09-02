@@ -226,7 +226,7 @@ def previous_month_handler(event=None):
         storage["current_app_year"] = str(int(storage["current_app_year"]) - 1)
 
     else:
-        storage["current_app_month"] = str(int(storage["current_app_month"] - 1))
+        storage["current_app_month"] = str(int(storage["current_app_month"]) - 1)
 
     display_results()
 
@@ -238,7 +238,7 @@ def next_month_handler(event=None):
         storage["current_app_year"] = str(int(storage["current_app_year"]) + 1)
 
     else:
-        storage["current_app_month"] = str(int(storage["current_app_month"] + 1))
+        storage["current_app_month"] = str(int(storage["current_app_month"]) + 1)
 
     display_results()
 
