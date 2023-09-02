@@ -47,7 +47,8 @@ def retrieve_spreadsheet(event):
     # Create a function to handle the processing of the file after loading.
     def on_read_load(event):
         spreadsheet = event.target.result
-        print(spreadsheet)
+        
+        main(spreadsheet)
 
     # Read the file
     reader = window.FileReader.new()
@@ -58,34 +59,8 @@ def retrieve_spreadsheet(event):
 
 document["spreadsheet_upload"].bind("change", retrieve_spreadsheet)
 
-# def get_spreadsheet(localstorage_key):
-#     encoded_spreadsheet = storage[localstorage_key]
 
-#     assert (encoded_spreadsheet is not None), "The spreadsheet could be be retrieved."
-
-#     spreadsheet = base64.b64decode(encoded_spreadsheet)
-
-#     return spreadsheet
-
-def get_spreadsheet_reader(spreadsheet):
-    reader = csv.reader(spreadsheet, delimiter=',', quotechar='"')
-    return reader
-
-
-def main(ev):
-    alert("Python!")
-
-    print("Main program loaded.")
-
-    if not (document["file_success"].style == "display:none;"):
-        return
-
-    # Wait for the spreadsheet to become accessible from localstorage.
-
-    spreadsheet = get_spreadsheet()
-
-    reader = get_spreadsheet_reader(spreadsheet)
-
+def main(spreadsheet):
 
     # Variables to store results
     # Storage Format = {
@@ -132,6 +107,11 @@ def main(ev):
         else:
             sorted_by_class[record.class_name].append(record)
 
+    def get_spreadsheet_reader(spreadsheet):
+        reader = csv.reader(spreadsheet, delimiter=',', quotechar='"')
+        return reader
+    
+    reader = get_spreadsheet_reader(spreadsheet)
 
     for i, row in enumerate(reader):
 
@@ -160,6 +140,3 @@ def main(ev):
     alert(sorted_by_class)
     alert(sorted_by_specialist)
     alert("Running!")
-
-
-# document["successful_upload_message"].bind("change", main)
