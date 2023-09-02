@@ -1,17 +1,23 @@
 
 # from dataclass import dataclass
 import string
-import base64
-# import csv
 
 from datetime import datetime
 
 from browser import document, window
-# from browser.local_storage import storage
 
-# Read the spreadsheet file from localstorage.
+# Variables to store results
+# Storage Format = {
+#                   Specialist Name : [List of Records],
+# 
+#                  }
+sorted_by_specialist = {}
 
-SPREADSHEET_LOCALSTORAGE_KEY = "spreadsheet"
+# Storage Format = {
+#                   Class Name : [List of Records],
+#                  }
+sorted_by_class = {}
+
 
 def retrieve_spreadsheet(event):
 
@@ -48,7 +54,7 @@ def retrieve_spreadsheet(event):
     def on_read_load(event):
         spreadsheet = event.target.result
         
-        main(spreadsheet)
+        process_csv_file(spreadsheet)
 
     # Read the file
     reader = window.FileReader.new()
@@ -101,20 +107,7 @@ def create_bar_chart(canvas_id, bar_labels, bar_data, bar_metric_name):
 
         
 
-def main(spreadsheet):
-
-    # Variables to store results
-    # Storage Format = {
-    #                   Specialist Name : [List of Records],
-    # 
-    #                  }
-    sorted_by_specialist = {}
-
-    # Storage Format = {
-    #                   Class Name : [List of Records],
-    #                  }
-    sorted_by_class = {}
-
+def process_csv_file(spreadsheet):
 
     def add_result(record : Record):
 
@@ -175,9 +168,11 @@ def main(spreadsheet):
                     
                     current_record = Record(current_date.month, current_specialist, column)
                     add_result(current_record)
+                    
+    display_results()
 
 
-    # canvas_id, bar_labels, bar_data, bar_metric_name
+def display_results(event=None)
 
     # Graph the results by class
     bar_labels = list(sorted_by_class.keys())
