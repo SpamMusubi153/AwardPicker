@@ -141,6 +141,10 @@ def main(spreadsheet):
                 else:
                     if column == "":
                         continue
+
+                    # Remove any extraneous spaces.
+                    column.replace(" ", "")
+                    
                     current_record = Record(current_date.month, current_specialist, column)
                     add_result(current_record)
 
