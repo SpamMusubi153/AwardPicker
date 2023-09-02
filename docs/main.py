@@ -162,6 +162,7 @@ def process_csv_file(spreadsheet):
                     # Save the most recent year and month to display it in the first generated graphs. 
                     current_year = current_date.year
                     current_month = current_date.month
+                    print(f"T0{current_year}-{current_month}")
                     # If the current year is the newest year, save the year, and indicate that the month needs to be updated too.
                     if current_year > current_app_year:
                         current_app_year = current_year
