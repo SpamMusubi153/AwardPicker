@@ -114,16 +114,15 @@ def main(spreadsheet):
     reader = get_spreadsheet_reader(spreadsheet)
 
     rows = spreadsheet.split("\n")
-    print(rows)
 
-    for i, row in enumerate(reader):
+    for i, row in enumerate(rows):
 
         # Remove any quotation characters that separate teacher names
-        print(row)
-        row = row.replace('"', "")
+        if row.contains('"'):
+            row = row.replace('"', "")
 
         # Skip over the header row
-        if row == 0:
+        if i == 0:
             continue
 
         current_date = None
