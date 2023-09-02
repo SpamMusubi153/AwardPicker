@@ -126,7 +126,7 @@ def create_bar_chart(canvas_id, bar_labels, bar_data, bar_metric_name):
 def process_csv_file(spreadsheet=None):
 
     if spreadsheet is None:
-        spreadsheet = storage[spreadsheet]
+        spreadsheet = storage["spreadsheet"]
 
     def add_result(record : Record):
 
