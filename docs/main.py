@@ -1,5 +1,6 @@
 
 # from dataclass import dataclass
+import json
 import string
 
 from datetime import datetime
@@ -13,12 +14,14 @@ from browser.local_storage import storage
 # 
 #                  }
 sorted_by_specialist = {}
+storage["sorted_by_specialist"] = "{}"
 storage["sorted_by_specialist_chart_created"] = "False"
 
 # Storage Format = {
 #                   Class Name : [List of Records],
 #                  }
 sorted_by_class = {}
+storage["sorted_by_class"] = "{}"
 storage["sorted_by_class_chart_created"] = "False"
 
 storage["current_app_month"] = str(0)
@@ -195,10 +198,18 @@ def process_csv_file(spreadsheet):
                     # Keep track of the number of classes in the data.
                     storage["number_of_classes"] = str(int(storage["number_of_classes"]) + 1)
 
+    storage["sorted_by_specialist"] = json.dumps(sorted_by_specialist)
+    storage["sorted_by_class"] = json.dumps(sorted_by_class)
+
     display_results()
 
 
 def display_results(event=None):
+
+    sorted_by_specialist = storage["sorted_by_specialist"]
+    sorted_by_specialist = json.dumps(sorted_by_specialist)
+    sorted_by_class = storage["sorted_by_class"]
+    sorted_by_class = json.dumps(sorted_by_class)
 
     # Graph the results by class
     bar_labels = list(sorted_by_class.keys())
@@ -236,6 +247,7 @@ def display_results(event=None):
     else:
         chart = window.Chart.getChart(SORTED_BY_SPECIALIST_CHART_ID)
         chart.destroy()
+
         create_bar_chart(SORTED_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_name)
         # chart.data.datasets[0] = bar_data
         # chart.update()
