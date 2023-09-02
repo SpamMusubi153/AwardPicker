@@ -229,7 +229,7 @@ def display_results(event=None):
     
     # Otherwise, update the already created chart.
     else:
-        chart = window.Chart.getChart("SORTED_BY_SPECIALIST_CHART_ID")
+        chart = window.Chart.getChart(SORTED_BY_SPECIALIST_CHART_ID)
         chart.data.datasets[0] = bar_data
         chart.update()
 
