@@ -4,7 +4,7 @@ import string
 
 from datetime import datetime
 
-from browser import document, window
+from browser import document, window, storage
 
 # Variables to store results
 # Storage Format = {
@@ -18,8 +18,8 @@ sorted_by_specialist = {}
 #                  }
 sorted_by_class = {}
 
-current_app_month = 0
-current_app_year = 0
+storage["current_app_month"] = 0
+storage["current_app_year"] = 0
 
 
 def retrieve_spreadsheet(event):
@@ -164,17 +164,17 @@ def process_csv_file(spreadsheet):
                     current_month = current_date.month
                     print(f"T0{current_year}-{current_month}")
                     # If the current year is the newest year, save the year, and indicate that the month needs to be updated too.
-                    print(f"{current_app_year}")
-                    if current_year > current_app_year:
+                    print(f"{storage['current_app_year']}")
+                    if current_year > storage["current_app_year"]:
                         print(f"T1{current_year}-{current_month}")
-                        current_app_year = current_year
+                        storage["current_app_year"] = current_year
                         print(f"T2{current_year}-{current_month}")
-                        current_app_month = 0
+                        storage["current_app_month"] = 0
 
                     print(f"First Check{current_year}-{current_month}")
 
-                    if current_month > current_app_month:
-                        current_app_month = current_month
+                    if current_month > storage["current_app_month"]:
+                        storage["current_app_month"] = current_month
 
                     print(f"{current_year}-{current_month}")
 
@@ -203,7 +203,7 @@ def display_results(event=None):
 
     # Create a list of data for the currently selected month
     current_data = []
-    current_data.append([sorted_by_class[key] for key in bar_labels if (sorted_by_class[key].month == current_app_month and sorted_by_class[key].year == current_app_year)])
+    current_data.append([sorted_by_class[key] for key in bar_labels if (sorted_by_class[key].month == storage["current_app_month"] and sorted_by_class[key].year == storage["current_app_year"])])
 
     # Tally the data for the current month
     bar_data = [len(current_data[class_name]) for class_name in current_data]
@@ -211,7 +211,7 @@ def display_results(event=None):
     bar_metric_name = "Number of 4-Star or 5-Star Days in Specialists"
 
 
-    month = datetime.strptime(str(current_app_month), "%M").strftime("%B")
-    document["currentMonth"] = f"{month}, {current_app_year}"
+    month = datetime.strptime(str(storage["current_app_month"]), "%M").strftime("%B")
+    document["currentMonth"] = f"{month}, {storage['current_app_year']}"
     create_bar_chart("byClassChart", bar_labels, bar_data, bar_metric_name)
     
