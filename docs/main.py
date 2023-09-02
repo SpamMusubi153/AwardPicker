@@ -4,7 +4,7 @@ import csv
 
 from datetime import datetime
 
-from browser import document
+from browser import document, alert
 from browser.local_storage import storage
 
 # Read the spreadsheet file from localstorage.
@@ -39,6 +39,7 @@ def main():
             pass
 
     print(spreadsheet)
+    alert("Running!")
 
-
+alert("Python!")
 document["spreadsheet_upload"].bind("onchange", main)
