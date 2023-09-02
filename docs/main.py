@@ -214,7 +214,7 @@ def display_results(event=None):
 
     print("Pre-processing Complete")
 
-    month = datetime.strptime(storage["current_app_month"], "%m").strftime("%B")
+    month = datetime(int(storage['current_app_year']), int(storage['current_app_month'])).strftime("%B")
     print("Month Processing Complete")
     document["currentMonth"] = f"{month}, {storage['current_app_year']}"
     create_bar_chart("byClassChart", bar_labels, bar_data, bar_metric_name)
