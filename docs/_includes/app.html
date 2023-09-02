@@ -12,7 +12,7 @@
         </div>
 
         <div id="file_success" style="display:none;">
-            <h4 id="successful_upload_message"></h4>
+            <h4>Your file has been uploaded successfully!</h4>
             <!-- <p>Please try making a copy of the file in Excel that only contains data from the most recent month.</p> -->
         </div>
 
@@ -20,7 +20,7 @@
 
         <input type="file" id="spreadsheet_upload" name="spreadsheet">
 
-        <script>
+        <!-- <script>
 
             function fileError(message=undefined, remedy=undefined){
                 document.getElementById("file_error_dialog").style.display = "block";
@@ -54,7 +54,6 @@
                     document.getElementById("file_error_dialog").style.display = "none";
                     document.getElementById("file_success").style.display = "block";
                     upload_label.textContent = "Upload another spreadsheet:";
-                    successful_upload_message.textContent = "Your file has been uploaded successfully!";
                 }
 
                 if(!(spreadsheet_upload.files[0].type == "text/csv")){
@@ -88,7 +87,7 @@
 
 
             }
-        </script>
+        </script> -->
     </div>
 
     <script id=app type="text/python" src="/AwardPicker/main.py"></script>

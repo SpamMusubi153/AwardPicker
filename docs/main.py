@@ -7,20 +7,61 @@ import csv
 from datetime import datetime
 
 from browser import document, alert
-from browser.local_storage import storage
+# from browser.local_storage import storage
 
 # Read the spreadsheet file from localstorage.
 
 SPREADSHEET_LOCALSTORAGE_KEY = "spreadsheet"
 
-def get_spreadsheet(localstorage_key):
-    encoded_spreadsheet = storage[localstorage_key]
+def retrieve_spreadsheet(event):
 
-    assert (encoded_spreadsheet is not None), "The spreadsheet could be be retrieved."
+    def display_file_error(message=None, remedy=None):
+        document["file_error_dialog"].style.display = "block"
+        document["file_success"].style.display = "none"
+        document["upload_label"].textContent = "Upload a spreadsheet:"
 
-    spreadsheet = base64.b64decode(encoded_spreadsheet)
+        if message is not None:
+            document["file_error_message"].textContent = message
 
-    return spreadsheet
+        if remedy is not None:
+            document["file_error_remedy"].textContent = remedy
+
+    filesize = document["spreadsheet_upload"].files[0].size
+
+    # Validate the file
+    # For performance, if the file is greater than 3MB, display an error and request a smaller file.
+    if filesize > 2000000:
+        display_file_error("Unfortunately, this file is too big!", "Please try making a copy of the file in Excel that only contains data from the most recent month.")
+        return
+    
+    if not (document["spreadsheet_upload"].files[0].type == "text/csv"):
+        display_file_error("Unfortunately, the file you uploaded wasn't a CSV.", "Try opening your file in Excel and exporting it as a CSV (Comma Separated Values) file.")
+        return
+    
+
+    # By this point, the file should have passed all tests.
+    document["file_error_dialog"].style.display = "none"
+    document["file_success"].style.display = "block"
+    document["upload_label"].textContent = "Upload another spreadsheet:"
+    
+
+    # Read the file
+    spreadsheet = open(document["spreadsheet_upload"].files[0])
+
+    print(spreadsheet)
+
+
+
+document["spreadsheet_upload"].bind("change", retrieve_spreadsheet)
+
+# def get_spreadsheet(localstorage_key):
+#     encoded_spreadsheet = storage[localstorage_key]
+
+#     assert (encoded_spreadsheet is not None), "The spreadsheet could be be retrieved."
+
+#     spreadsheet = base64.b64decode(encoded_spreadsheet)
+
+#     return spreadsheet
 
 def get_spreadsheet_reader(spreadsheet):
     reader = csv.reader(spreadsheet, delimiter=',', quotechar='"')
@@ -117,4 +158,4 @@ def main(ev):
     alert("Running!")
 
 
-document["successful_upload_message"].bind("change", main)
+# document["successful_upload_message"].bind("change", main)
