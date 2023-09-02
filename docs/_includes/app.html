@@ -5,6 +5,7 @@
 
     <script id=app type="text/python" src="/AwardPicker/main.py"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 
     <div>
@@ -26,10 +27,32 @@
 
     
 
-    <div>
+    <div id="results">
+
+        <!-- A navigation bar to toggle between different months -->
+        <div id="monthSelector">
+            <button class="roundedButton">
+                <span class="material-symbols-outlined">
+                    arrow_back_ios
+                </span>
+            </button>
+
+            <span class="roundedButton" id="currentMonth">
+                Loading...
+            </span>
+
+            <button class="roundedButton">
+                <span class="material-symbols-outlined">
+                    arrow_forward_ios
+                </span>
+            </button>
+
+        </div>
+
         <canvas id="byClassChart"></canvas>
         <br>
         <canvas id="bySpecialistChart"></canvas>
+        
     </div>
 
 
