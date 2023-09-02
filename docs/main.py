@@ -116,6 +116,7 @@ def main(spreadsheet):
     for i, row in enumerate(reader):
 
         # Remove any quotation characters that separate teacher names
+        print(row)
         row = row.replace('"', "")
 
         # Skip over the header row
