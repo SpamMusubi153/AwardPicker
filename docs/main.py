@@ -71,6 +71,34 @@ class Record:
         self.specialist = specialist
         self.class_name = class_name
 
+def create_bar_chart(canvas_id, bar_labels, bar_data, bar_metric_name):
+    """Creates a bar chart in a canvas provided its id, the labels of the bars, the 
+    data for the bars, and the name of the metric the bars represent."""
+
+    ctx = document[canvas_id]
+
+    window.Chart.new(ctx, {
+        "type" : "bar",
+        "data" : {
+            "labels" : bar_labels,
+            "datasets" : [{
+                "label" : bar_metric_name,
+                "data" : bar_data,
+                "borderWidth" : 1,
+                "borderRadius" : 2
+            }]
+        },
+
+        "options" : {
+            "scales" : {
+                "y" : {
+                    "beginAtZero" : True
+                }
+            }
+        }
+    })
+
+
         
 
 def main(spreadsheet):
@@ -148,5 +176,12 @@ def main(spreadsheet):
                     current_record = Record(current_date.month, current_specialist, column)
                     add_result(current_record)
 
-    print(sorted_by_class)
-    print(sorted_by_specialist)
+
+    # canvas_id, bar_labels, bar_data, bar_metric_name
+
+    # Graph the results by class
+    bar_labels = sorted_by_class.keys()
+    bar_data = [len(sorted_by_class[key]) for key in bar_labels]
+    bar_metric_name = "Number of 4-Star Special"
+    create_bar_chart("byClassChart", bar_labels, bar_data, bar_metric_name)
+    
