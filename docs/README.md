@@ -5,7 +5,9 @@
 
 <details>
 
-<summary><span>🔽</span>Make sure that:</summary>
+<summary><span>🔽</span><strong>Make sure that:</strong></summary>
+
+<br>
 
 <!-- <h4 id="make-sure-that">Make sure that:</h4> -->
 
