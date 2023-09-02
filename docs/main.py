@@ -235,7 +235,7 @@ def display_results(event=None):
     # Otherwise, update the already created chart.
     else:
         chart = window.Chart.getChart(SORTED_BY_SPECIALIST_CHART_ID)
-        chart.clear()
+        chart.destroy()
         create_bar_chart(SORTED_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_name)
         # chart.data.datasets[0] = bar_data
         # chart.update()
