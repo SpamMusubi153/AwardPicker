@@ -73,10 +73,11 @@ document["spreadsheet_upload"].bind("change", retrieve_spreadsheet)
 # @dataclass
 class Record:
     month : int
+    year : int
     specialist : string
     class_name : string
 
-    def __init__(self, month:int, specialist:string, class_name:string):
+    def __init__(self, month:int, year:int, specialist:string, class_name:string):
         self.month = month
         self.specialist = specialist
         self.class_name = class_name
@@ -181,7 +182,7 @@ def process_csv_file(spreadsheet):
                     # Remove any extraneous spaces.
                     column.replace(" ", "")
                     
-                    current_record = Record(current_date.month, current_specialist, column)
+                    current_record = Record(current_date.month, current_date.year, current_specialist, column)
                     add_result(current_record)
 
     display_results()
@@ -203,7 +204,7 @@ def display_results(event=None):
             else:
                 current_key_data.remove(record)
         current_data.append(current_key_data)
-        
+
 
     # Tally the data for the current month
     bar_data = [len(current_data[class_name]) for class_name in current_data]
