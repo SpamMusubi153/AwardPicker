@@ -1,5 +1,5 @@
 
-from dataclass import dataclass
+# from dataclass import dataclass
 import string
 import base64
 import csv
@@ -50,11 +50,16 @@ def main():
     #                  }
     sorted_by_class = {}
 
-    @dataclass
+    # @dataclass
     class Record:
         month : int
         specialist : string
         class_name : string
+
+        def __init__(self, month:int, specialist:string, class_name:string):
+            self.month = month
+            self.specialist = specialist
+            self.class_name = class_name
 
 
     def add_result(record : Record):
