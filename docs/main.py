@@ -113,6 +113,9 @@ def main(spreadsheet):
     
     reader = get_spreadsheet_reader(spreadsheet)
 
+    for row in reader:
+        print(row)
+
     for i, row in enumerate(reader):
 
         # Remove any quotation characters that separate teacher names
