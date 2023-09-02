@@ -32,6 +32,9 @@ def main(ev):
 
     print("Main program loaded.")
 
+    if not (document["file_success"].style == "display:none;"):
+        return
+
     # Wait for the spreadsheet to become accessible from localstorage.
 
     spreadsheet = get_spreadsheet()
@@ -114,4 +117,4 @@ def main(ev):
     alert("Running!")
 
 
-document["spreadsheet_upload"].bind("onchange", main)
+document["spreadsheet_upload"].bind("click", main)
