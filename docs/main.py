@@ -170,6 +170,8 @@ def process_csv_file(spreadsheet):
                     if current_month > current_app_month:
                         current_app_month = current_month
 
+                    print(f"{current_year}-{current_month}")
+
                 elif j == 1:
                     current_specialist = column
 
@@ -182,6 +184,8 @@ def process_csv_file(spreadsheet):
                     
                     current_record = Record(current_date.month, current_specialist, column)
                     add_result(current_record)
+
+    print("Finished!")
 
     display_results()
 
