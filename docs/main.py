@@ -27,7 +27,8 @@ def get_spreadsheet_reader(spreadsheet):
     return reader
 
 
-def main():
+def main(ev):
+    alert("Python!")
 
     print("Main program loaded.")
 
@@ -112,5 +113,5 @@ def main():
     alert(sorted_by_specialist)
     alert("Running!")
 
-alert("Python!")
+
 document["spreadsheet_upload"].bind("onchange", main)
