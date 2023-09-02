@@ -60,6 +60,19 @@ def retrieve_spreadsheet(event):
 document["spreadsheet_upload"].bind("change", retrieve_spreadsheet)
 
 
+# @dataclass
+class Record:
+    month : int
+    specialist : string
+    class_name : string
+
+    def __init__(self, month:int, specialist:string, class_name:string):
+        self.month = month
+        self.specialist = specialist
+        self.class_name = class_name
+
+        
+
 def main(spreadsheet):
 
     # Variables to store results
@@ -74,44 +87,29 @@ def main(spreadsheet):
     #                  }
     sorted_by_class = {}
 
-    # @dataclass
-    class Record:
-        month : int
-        specialist : string
-        class_name : string
-
-        def __init__(self, month:int, specialist:string, class_name:string):
-            self.month = month
-            self.specialist = specialist
-            self.class_name = class_name
-
 
     def add_result(record : Record):
 
         # Add the result to the sorted_by_specialist dictionary.
-        # If the current specialist key does not exist, create it = now.
-        if sorted_by_specialist[record.specialist] is None:
+        if record.specialist in sorted_by_specialist.keys():
+            sorted_by_specialist[record.specialist].append(record)
+
+        # If the current specialist key does not exist, create it now.
+        else:
             sorted_by_specialist[record.specialist] = []
             sorted_by_specialist[record.specialist].append(record)
 
-        
-        # Otherwise, if the key exists, just add the record.
-        else:
-            sorted_by_specialist[record.specialist].append(record)
 
 
         # Then, add the result to the sorted_by_class dictionary.
-        if sorted_by_class[record.class_name] is None:
-            sorted_by_class[record.class_name] = []
-            sorted_by_class[record.class_name].append(record)
-        else:
+        if record.class_name in sorted_by_class.keys():
             sorted_by_class[record.class_name].append(record)
 
-    def get_spreadsheet_reader(spreadsheet):
-        reader = csv.reader(spreadsheet, delimiter=',', quotechar='"')
-        return reader
-    
-    reader = get_spreadsheet_reader(spreadsheet)
+        # If necessary, create the class name key list.
+        else:
+            sorted_by_class[record.class_name] = []
+            sorted_by_class[record.class_name].append(record)
+            
 
     rows = spreadsheet.split("\n")
 
@@ -119,26 +117,33 @@ def main(spreadsheet):
 
         # Remove any quotation characters that separate teacher names
         row = row.replace('"', "")
+        row = row.replace('\r', "")
+
 
         # Skip over the header row
         if i == 0:
             continue
 
-        current_date = None
-        current_specialist = None
-        for j in range(len(row)):
+        columns = row.split(",")
+        if len(columns) > 1:
+            current_date = None
+            current_specialist = None
 
-            # Extract the date from the first column of each row.
-            if j == 0:                
-                current_date = datetime.strptime(row[j], "%-m/%-d/%Y %-H:%-I:%-S")
+            for j, column in enumerate(columns):
 
-            elif j == 1:
-                current_specialist = row[j]
+                # Extract the date from the first column of each row.
+                if j == 0:                
+                    current_date = datetime.strptime(column, "%m/%d/%Y %H:%M:%S")
 
-            else:
-                current_record = Record(current_date.month, current_specialist, row[j])
-                add_result(current_record)
+                elif j == 1:
+                    current_specialist = column
 
-    alert(sorted_by_class)
-    alert(sorted_by_specialist)
+                else:
+                    if column == "":
+                        continue
+                    current_record = Record(current_date.month, current_specialist, column)
+                    add_result(current_record)
+
+    print(sorted_by_class)
+    print(sorted_by_specialist)
     alert("Running!")
