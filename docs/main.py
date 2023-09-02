@@ -201,8 +201,10 @@ def display_results(event=None):
 
     bar_metric_name = "Number of 4-Star or 5-Star Days in Specialists"
 
+    print("Pre-processing Complete")
 
     month = datetime.strptime(storage["current_app_month"], "%m").strftime("%B")
+    print("Month Processing Complete")
     document["currentMonth"] = f"{month}, {storage['current_app_year']}"
     create_bar_chart("byClassChart", bar_labels, bar_data, bar_metric_name)
     
