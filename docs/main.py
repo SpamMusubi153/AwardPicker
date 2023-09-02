@@ -117,4 +117,4 @@ def main(ev):
     alert("Running!")
 
 
-document["successful_upload_message"].bind("onchange", main)
+document["successful_upload_message"].bind("change", main)
