@@ -117,4 +117,4 @@ def main(ev):
     alert("Running!")
 
 
-document["file_success"].bind("onchange", main)
+document["spreadsheet_upload"].bind("oninput", main)
