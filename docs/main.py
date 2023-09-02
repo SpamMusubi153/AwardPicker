@@ -6,7 +6,7 @@ import csv
 
 from datetime import datetime
 
-from browser import document, window, alert
+from browser import document, window
 # from browser.local_storage import storage
 
 # Read the spreadsheet file from localstorage.
@@ -146,4 +146,3 @@ def main(spreadsheet):
 
     print(sorted_by_class)
     print(sorted_by_specialist)
-    alert("Running!")
