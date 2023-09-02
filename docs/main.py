@@ -113,9 +113,8 @@ def main(spreadsheet):
     
     reader = get_spreadsheet_reader(spreadsheet)
 
-    print(spreadsheet)
-    for row in reader:
-        print(row)
+    rows = spreadsheet.split("\n")
+    print(rows)
 
     for i, row in enumerate(reader):
 
