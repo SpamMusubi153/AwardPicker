@@ -214,10 +214,32 @@ def display_results(event=None):
 
     bar_metric_name = "Number of 4-Star or 5-Star Days in Specialists"
 
-    print("Pre-processing Complete")
-
     month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
-    print("Month Processing Complete")
-    document["currentMonth"] = f"{month}, {storage['current_app_year']}"
+
+    document["currentMonth"].textContent = f"{month}, {storage['current_app_year']}"
     create_bar_chart("byClassChart", bar_labels, bar_data, bar_metric_name)
     
+
+def previous_month_handler(event=None):
+    if int(storage["current_app_month"]) == 1:
+        storage["current_app_month"] = "12"
+        storage["current_app_year"] = str(int(storage["current_app_year"]) - 1)
+
+    else:
+        storage["current_app_month"] = str(int(storage["current_app_month"] - 1))
+
+    display_results()
+
+document["previousMonthButton"].bind("click", previous_month_handler)
+
+def next_month_handler(event=None):
+    if int(storage["current_app_month"]) == 12:
+        storage["current_app_month"] = "1"
+        storage["current_app_year"] = str(int(storage["current_app_year"]) + 1)
+
+    else:
+        storage["current_app_month"] = str(int(storage["current_app_month"] + 1))
+
+    display_results()
+
+document["nextMonthButton"].bind("click", next_month_handler)
