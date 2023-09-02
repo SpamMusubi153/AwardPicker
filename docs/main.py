@@ -194,7 +194,16 @@ def display_results(event=None):
 
     # Create a list of data for the currently selected month
     current_data = []
-    current_data.append([sorted_by_class[key] for key in bar_labels if (sorted_by_class[key].month == int(storage["current_app_month"]) and sorted_by_class[key].year == int(storage["current_app_year"]))])
+    for i, key in enumerate(bar_labels):
+        current_key_data = sorted_by_class[key]
+
+        for record in current_key_data:
+            if record.month == int(storage["current_app_month"]) and record.year == int(storage["current_app_year"]):
+                continue
+            else:
+                current_key_data.remove(record)
+        current_data.append(current_key_data)
+        
 
     # Tally the data for the current month
     bar_data = [len(current_data[class_name]) for class_name in current_data]
