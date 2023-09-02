@@ -207,7 +207,6 @@ def process_csv_file(spreadsheet=None):
 
 def display_results(event=None):
 
-    process_csv_file()
 
     # Graph the results by class
     bar_labels = list(sorted_by_class.keys())
@@ -260,6 +259,7 @@ def previous_month_handler(event=None):
     else:
         storage["current_app_month"] = str(int(storage["current_app_month"]) - 1)
 
+    process_csv_file()
     display_results()
 
 document["previousMonthButton"].bind("click", previous_month_handler)
@@ -272,6 +272,7 @@ def next_month_handler(event=None):
     else:
         storage["current_app_month"] = str(int(storage["current_app_month"]) + 1)
 
+    process_csv_file()
     display_results()
 
 document["nextMonthButton"].bind("click", next_month_handler)
