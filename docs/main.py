@@ -18,6 +18,9 @@ sorted_by_specialist = {}
 #                  }
 sorted_by_class = {}
 
+current_app_month = 0
+current_app_year = 0
+
 
 def retrieve_spreadsheet(event):
 
@@ -77,6 +80,7 @@ class Record:
         self.specialist = specialist
         self.class_name = class_name
 
+
 def create_bar_chart(canvas_id, bar_labels, bar_data, bar_metric_name):
     """Creates a bar chart in a canvas provided its id, the labels of the bars, the 
     data for the bars, and the name of the metric the bars represent."""
@@ -104,8 +108,7 @@ def create_bar_chart(canvas_id, bar_labels, bar_data, bar_metric_name):
         }
     })
 
-
-        
+ 
 
 def process_csv_file(spreadsheet):
 
@@ -156,6 +159,17 @@ def process_csv_file(spreadsheet):
                 if j == 0:                
                     current_date = datetime.strptime(column, "%m/%d/%Y %H:%M:%S")
 
+                    # Save the most recent year and month to display it in the first generated graphs. 
+                    current_year = current_date.year
+                    current_month = current_date.month
+                    # If the current year is the newest year, save the year, and indicate that the month needs to be updated too.
+                    if current_year >= current_app_year:
+                        current_app_year = current_year
+                        current_month = 0
+
+                    if current_month > current_app_month:
+                        current_app_month = current_month
+
                 elif j == 1:
                     current_specialist = column
 
@@ -176,12 +190,18 @@ def display_results(event=None):
 
     # Graph the results by class
     bar_labels = list(sorted_by_class.keys())
-    bar_data = [len(sorted_by_class[key]) for key in bar_labels]
+
+    # Create a list of data for the currently selected month
+    current_data = []
+    current_data.append([sorted_by_class[key] for key in bar_labels if (sorted_by_class[key].month == current_app_month and sorted_by_class[key].year == current_app_year)])
+
+    # Tally the data for the current month
+    bar_data = [len(current_data[class_name]) for class_name in current_data]
+
     bar_metric_name = "Number of 4-Star or 5-Star Days in Specialists"
 
-    print(bar_labels)
-    print(bar_data)
-    print(bar_metric_name)
 
+    month = datetime.strptime(str(current_app_month), "%M").strftime("%B")
+    document["currentMonth"] = f"{month}, {current_app_year}"
     create_bar_chart("byClassChart", bar_labels, bar_data, bar_metric_name)
     
