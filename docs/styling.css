@@ -29,27 +29,13 @@ summary {
     border: none;
 }
 
-.roundedButton span {
-
-    margin: auto;
-
-}
-
 
 .monthSelector {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.monthSelector p {
-    text-align: center;
+    margin: auto;
+    width: 50%;
 }
 
 .results {
-    margin: auto;
-}
-
-.buttonPanel {
     margin: auto;
 }
