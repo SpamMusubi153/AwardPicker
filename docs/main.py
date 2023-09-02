@@ -79,6 +79,7 @@ class Record:
 
     def __init__(self, month:int, year:int, specialist:string, class_name:string):
         self.month = month
+        self.year = year
         self.specialist = specialist
         self.class_name = class_name
 
