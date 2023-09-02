@@ -74,12 +74,14 @@ document["spreadsheet_upload"].bind("change", retrieve_spreadsheet)
 class Record:
     month : int
     year : int
+    day : int
     specialist : string
     class_name : string
 
-    def __init__(self, month:int, year:int, specialist:string, class_name:string):
+    def __init__(self, month:int, year:int, day:int, specialist:string, class_name:string):
         self.month = month
         self.year = year
+        self.day = day
         self.specialist = specialist
         self.class_name = class_name
 
@@ -183,7 +185,7 @@ def process_csv_file(spreadsheet):
                     # Remove any extraneous spaces.
                     column.replace(" ", "")
                     
-                    current_record = Record(current_date.month, current_date.year, current_specialist, column)
+                    current_record = Record(current_date.month, current_date.year, current_date.day, current_specialist, column)
                     add_result(current_record)
 
     display_results()
@@ -214,7 +216,7 @@ def display_results(event=None):
 
     print("Pre-processing Complete")
 
-    month = datetime(int(storage['current_app_year']), int(storage['current_app_month'])).strftime("%B")
+    month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
     print("Month Processing Complete")
     document["currentMonth"] = f"{month}, {storage['current_app_year']}"
     create_bar_chart("byClassChart", bar_labels, bar_data, bar_metric_name)
