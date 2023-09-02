@@ -168,11 +168,11 @@ def process_csv_file(spreadsheet):
                     
                     current_record = Record(current_date.month, current_specialist, column)
                     add_result(current_record)
-                    
+
     display_results()
 
 
-def display_results(event=None)
+def display_results(event=None):
 
     # Graph the results by class
     bar_labels = list(sorted_by_class.keys())
