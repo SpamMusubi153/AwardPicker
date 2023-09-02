@@ -1,6 +1,5 @@
 
 # from dataclass import dataclass
-import json
 import string
 
 from datetime import datetime
@@ -14,20 +13,20 @@ from browser.local_storage import storage
 # 
 #                  }
 sorted_by_specialist = {}
-storage["sorted_by_specialist"] = ""
 storage["sorted_by_specialist_chart_created"] = "False"
 
 # Storage Format = {
 #                   Class Name : [List of Records],
 #                  }
 sorted_by_class = {}
-storage["sorted_by_class"] = ""
 storage["sorted_by_class_chart_created"] = "False"
 
 storage["current_app_month"] = str(0)
 storage["current_app_year"] = str(0)
 
 storage["number_of_classes"] = str(0)
+
+document["data"] = ""
 
 
 def retrieve_spreadsheet(event):
@@ -64,6 +63,8 @@ def retrieve_spreadsheet(event):
     # Create a function to handle the processing of the file after loading.
     def on_read_load(event):
         spreadsheet = event.target.result
+
+        document["data"] = spreadsheet
         
         process_csv_file(spreadsheet)
 
@@ -122,7 +123,10 @@ def create_bar_chart(canvas_id, bar_labels, bar_data, bar_metric_name):
 
  
 
-def process_csv_file(spreadsheet):
+def process_csv_file(spreadsheet=None):
+
+    if spreadsheet is None:
+        spreadsheet = storage[spreadsheet]
 
     def add_result(record : Record):
 
@@ -198,20 +202,12 @@ def process_csv_file(spreadsheet):
                     # Keep track of the number of classes in the data.
                     storage["number_of_classes"] = str(int(storage["number_of_classes"]) + 1)
 
-    print(sorted_by_specialist)
-    storage["sorted_by_specialist"] = json.dump(sorted_by_specialist)
-    storage["sorted_by_class"] = json.dump(sorted_by_class)
-
     display_results()
 
 
 def display_results(event=None):
 
-    sorted_by_specialist = storage["sorted_by_specialist"]
-    sorted_by_specialist = json.dump(sorted_by_specialist)
-
-    sorted_by_class = storage["sorted_by_class"]
-    sorted_by_class = json.dump(sorted_by_class)
+    process_csv_file()
 
     # Graph the results by class
     bar_labels = list(sorted_by_class.keys())
