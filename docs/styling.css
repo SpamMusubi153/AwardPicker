@@ -22,6 +22,16 @@ summary {
 
 
 .roundedButton {
-    backdrop-filter: brightness(85%);
+    background-color: transparent;
+    backdrop-filter: brightness(90%);
     border-radius: 10%;
+    padding: 15px;
+    border: none;
+}
+
+
+.monthSelector {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
