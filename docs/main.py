@@ -6,7 +6,7 @@ import csv
 
 from datetime import datetime
 
-from browser import document, alert
+from browser import document, window, alert
 # from browser.local_storage import storage
 
 # Read the spreadsheet file from localstorage.
@@ -44,11 +44,15 @@ def retrieve_spreadsheet(event):
     document["file_success"].style.display = "block"
     document["upload_label"].textContent = "Upload another spreadsheet:"
     
+    # Create a function to handle the processing of the file after loading.
+    def on_read_load(event):
+        spreadsheet = event.target.result
+        print(spreadsheet)
 
     # Read the file
-    spreadsheet = open(document["spreadsheet_upload"].files[0])
-
-    print(spreadsheet)
+    reader = window.FileReader.new()
+    reader.readAsText(document["spreadsheet_upload"].files[0])
+    reader.bind("load", on_read_load)
 
 
 
