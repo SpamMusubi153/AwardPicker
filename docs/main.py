@@ -4,7 +4,8 @@ import string
 
 from datetime import datetime
 
-from browser import document, window, storage
+from browser import document, window
+from browser.local_storage import storage
 
 # Variables to store results
 # Storage Format = {
