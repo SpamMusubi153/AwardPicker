@@ -167,6 +167,8 @@ def process_csv_file(spreadsheet):
                         current_app_year = current_year
                         current_app_month = 0
 
+                    print(f"First Check{current_year}-{current_month}")
+
                     if current_month > current_app_month:
                         current_app_month = current_month
 
