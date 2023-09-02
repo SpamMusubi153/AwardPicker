@@ -199,8 +199,8 @@ def process_csv_file(spreadsheet):
                     storage["number_of_classes"] = str(int(storage["number_of_classes"]) + 1)
 
     print(sorted_by_specialist)
-    storage["sorted_by_specialist"] = json.dumps(sorted_by_specialist)
-    storage["sorted_by_class"] = json.dumps(sorted_by_class)
+    storage["sorted_by_specialist"] = json.dump(sorted_by_specialist)
+    storage["sorted_by_class"] = json.dump(sorted_by_class)
 
     display_results()
 
@@ -208,10 +208,10 @@ def process_csv_file(spreadsheet):
 def display_results(event=None):
 
     sorted_by_specialist = storage["sorted_by_specialist"]
-    sorted_by_specialist = json.dumps(sorted_by_specialist)
+    sorted_by_specialist = json.dump(sorted_by_specialist)
 
     sorted_by_class = storage["sorted_by_class"]
-    sorted_by_class = json.dumps(sorted_by_class)
+    sorted_by_class = json.dump(sorted_by_class)
 
     # Graph the results by class
     bar_labels = list(sorted_by_class.keys())
