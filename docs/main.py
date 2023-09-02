@@ -195,11 +195,12 @@ def display_results(event=None):
 
     # Create a list of data for the currently selected month
     current_data = []
-    for i, key in enumerate(bar_labels):
+    for key in bar_labels:
         current_key_data = sorted_by_class[key]
 
         for record in current_key_data:
             if record.month == int(storage["current_app_month"]) and record.year == int(storage["current_app_year"]):
+                print(record.year)
                 continue
             else:
                 current_key_data.remove(record)
