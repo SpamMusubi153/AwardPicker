@@ -7,12 +7,9 @@
 
 <span>🔽</span>
 
-<summary>Make sure that:
+<summary>Make sure that:</summary>
 
-
-</summary>
-
-<h4 id="make-sure-that">Make sure that:</h4>
+<!-- <h4 id="make-sure-that">Make sure that:</h4> -->
 
 <ul>
   <li>Each row contains a date and a class name, followed by the names of 4-Star classes</li>
