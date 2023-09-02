@@ -182,7 +182,7 @@ def main(spreadsheet):
     # Graph the results by class
     bar_labels = list(sorted_by_class.keys())
     bar_data = [len(sorted_by_class[key]) for key in bar_labels]
-    bar_metric_name = "Number of 4-Star Days in Specialists"
+    bar_metric_name = "Number of 4-Star or 5-Star Days in Specialists"
 
     print(bar_labels)
     print(bar_data)
