@@ -13,11 +13,13 @@ from browser.local_storage import storage
 # 
 #                  }
 sorted_by_specialist = {}
+storage["sorted_by_specialist_chart_created"] = "False"
 
 # Storage Format = {
 #                   Class Name : [List of Records],
 #                  }
 sorted_by_class = {}
+storage["sorted_by_class_chart_created"] = "False"
 
 storage["current_app_month"] = str(0)
 storage["current_app_year"] = str(0)
@@ -217,8 +219,21 @@ def display_results(event=None):
     month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
 
     document["currentMonth"].textContent = f"{month}, {storage['current_app_year']}"
-    create_bar_chart("byClassChart", bar_labels, bar_data, bar_metric_name)
+
+    SORTED_BY_SPECIALIST_CHART_ID = "byClassChart"
+
+    # If the chart was not previously created, create it now
+    if storage["sorted_by_specialist_chart_created"] == "False":
+        create_bar_chart(SORTED_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_name)
+        storage["sorted_by_specialist_chart_created"] = "True"
     
+    # Otherwise, update the already created chart.
+    else:
+        chart = window.Chart.getChart("SORTED_BY_SPECIALIST_CHART_ID")
+        chart.data.datasets[0] = bar_data
+        chart.update()
+
+
 
 def previous_month_handler(event=None):
     if int(storage["current_app_month"]) == 1:
