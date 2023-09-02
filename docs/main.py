@@ -24,6 +24,8 @@ storage["sorted_by_class_chart_created"] = "False"
 storage["current_app_month"] = str(0)
 storage["current_app_year"] = str(0)
 
+storage["number_of_classes"] = str(0)
+
 
 def retrieve_spreadsheet(event):
 
@@ -190,6 +192,9 @@ def process_csv_file(spreadsheet):
                     current_record = Record(current_date.month, current_date.year, current_date.day, current_specialist, column)
                     add_result(current_record)
 
+                    # Keep track of the number of classes in the data.
+                    storage["number_of_classes"] = str(int(storage["number_of_classes"]) + 1)
+
     display_results()
 
 
@@ -230,8 +235,10 @@ def display_results(event=None):
     # Otherwise, update the already created chart.
     else:
         chart = window.Chart.getChart(SORTED_BY_SPECIALIST_CHART_ID)
-        chart.data.datasets[0] = bar_data
-        chart.update()
+        chart.clear()
+        create_bar_chart(SORTED_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_name)
+        # chart.data.datasets[0] = bar_data
+        # chart.update()
 
 
 
