@@ -163,21 +163,13 @@ def process_csv_file(spreadsheet):
                     # Save the most recent year and month to display it in the first generated graphs. 
                     current_year = current_date.year
                     current_month = current_date.month
-                    print(f"T0{current_year}-{current_month}")
                     # If the current year is the newest year, save the year, and indicate that the month needs to be updated too.
-                    print(f"{storage['current_app_year']}")
                     if current_year > int(storage["current_app_year"]):
-                        print(f"T1{current_year}-{current_month}")
                         storage["current_app_year"] = str(current_year)
-                        print(f"T2{current_year}-{current_month}")
                         storage["current_app_month"] = str(0)
-
-                    print(f"First Check{current_year}-{current_month}")
 
                     if current_month > int(storage["current_app_month"]):
                         storage["current_app_month"] = str(current_month)
-
-                    print(f"{current_year}-{current_month}")
 
                 elif j == 1:
                     current_specialist = column
@@ -191,8 +183,6 @@ def process_csv_file(spreadsheet):
                     
                     current_record = Record(current_date.month, current_specialist, column)
                     add_result(current_record)
-
-    print("Finished!")
 
     display_results()
 
