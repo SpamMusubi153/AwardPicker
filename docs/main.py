@@ -201,7 +201,6 @@ def display_results(event=None):
 
         for record in current_key_data:
             if record.month == int(storage["current_app_month"]) and record.year == int(storage["current_app_year"]):
-                print(record.year)
                 continue
             else:
                 current_key_data.remove(record)
@@ -209,7 +208,7 @@ def display_results(event=None):
 
 
     # Tally the data for the current month
-    bar_data = [len(current_data[class_name]) for class_name in current_data]
+    bar_data = [len(current_records_list) for current_records_list in current_data]
 
     bar_metric_name = "Number of 4-Star or 5-Star Days in Specialists"
 
