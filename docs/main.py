@@ -113,6 +113,7 @@ def main(spreadsheet):
     
     reader = get_spreadsheet_reader(spreadsheet)
 
+    print(spreadsheet)
     for row in reader:
         print(row)
 
