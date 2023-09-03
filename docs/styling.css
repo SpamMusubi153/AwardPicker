@@ -39,3 +39,7 @@ summary {
 .results {
     margin: auto;
 }
+
+.monthSelector .currentMonth {
+    padding: 10px 10px;
+}
