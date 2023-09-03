@@ -309,7 +309,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
         bar_data = get_current_records_count(sorted_by_class)
 
         # The title of the current graph
-        bar_metric_name = "Number of 4-Star or 5-Star Days in Specialists"
+        bar_metric_name = "Number of 4 or 5-Star Days in Specialists"
 
         # Retrieve the full month name
         month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
