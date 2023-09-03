@@ -103,6 +103,8 @@ def process_file():
     spreadsheet = storage["data"]
     spreadsheet = base64.b64decode(spreadsheet).decode("utf-8")
 
+    print(1)
+
 
     # A function to sort records into dictionaries organized by specialist and class name.
     def add_result(record : Record):
@@ -156,8 +158,12 @@ def process_file():
                 if j == 0:                
                     current_date = datetime.strptime(column, "%m/%d/%Y %H:%M:%S")
 
+                    print(2)
+
                     # If this is the first time creating a graph from the uploaded file, automatically pick the latest month and year.
                     if storage["first_graph_from_file"] == "True":
+
+                        print(3)
 
                         # Save the most recent year and month to display it in the first generated graphs. 
                         current_year = current_date.year
@@ -190,7 +196,9 @@ def process_file():
 
                     # Keep track of the number of classes in the data.
                     storage["number_of_classes"] = str(int(storage["number_of_classes"]) + 1)
+                    print(4)
 
+    print(5)
     storage["first_graph_from_file"] = "False"
     _display_results(sorted_by_specialist, sorted_by_class)
 
