@@ -127,6 +127,7 @@ def process_csv_file(spreadsheet=None):
 
     if spreadsheet is None:
         spreadsheet = storage["spreadsheet"]
+        print(spreadsheet)
 
     def add_result(record : Record):
 
