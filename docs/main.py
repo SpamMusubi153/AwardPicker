@@ -27,7 +27,7 @@ storage["current_app_year"] = str(0)
 
 storage["number_of_classes"] = str(0)
 
-document["data"] = ""
+storage["data"] = ""
 
 
 def retrieve_spreadsheet(event):
@@ -126,8 +126,8 @@ def create_bar_chart(canvas_id, bar_labels, bar_data, bar_metric_name):
 
 def process_csv_file(spreadsheet=None):
 
-    if "spreadsheet" in storage.keys():
-        spreadsheet = storage["spreadsheet"]
+    if "data" in storage.keys():
+        spreadsheet = storage["data"]
         spreadsheet = base64.b64decode(spreadsheet).decode("utf-8")
 
     def add_result(record : Record):
@@ -177,7 +177,7 @@ def process_csv_file(spreadsheet=None):
                 if j == 0:                
                     current_date = datetime.strptime(column, "%m/%d/%Y %H:%M:%S")
 
-                    if not "spreadsheet" in storage.keys():
+                    if not "data" in storage.keys():
                         # Save the most recent year and month to display it in the first generated graphs. 
                         current_year = current_date.year
                         current_month = current_date.month
