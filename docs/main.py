@@ -9,7 +9,7 @@ from browser import document, window
 from browser.local_storage import storage
 
 # TODO: Later, configure the program to automatically load previously stored data.
-window.localStorage.clear()
+# window.localStorage.clear()
 
 # Store the month and year currently selected for display by the user
 storage["current_app_month"] = str(0)
