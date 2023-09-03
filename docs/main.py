@@ -177,16 +177,17 @@ def process_csv_file(spreadsheet=None):
                 if j == 0:                
                     current_date = datetime.strptime(column, "%m/%d/%Y %H:%M:%S")
 
-                    # Save the most recent year and month to display it in the first generated graphs. 
-                    current_year = current_date.year
-                    current_month = current_date.month
-                    # If the current year is the newest year, save the year, and indicate that the month needs to be updated too.
-                    if current_year > int(storage["current_app_year"]):
-                        storage["current_app_year"] = str(current_year)
-                        storage["current_app_month"] = str(0)
+                    if not "spreadsheet" in storage.keys():
+                        # Save the most recent year and month to display it in the first generated graphs. 
+                        current_year = current_date.year
+                        current_month = current_date.month
+                        # If the current year is the newest year, save the year, and indicate that the month needs to be updated too.
+                        if current_year > int(storage["current_app_year"]):
+                            storage["current_app_year"] = str(current_year)
+                            storage["current_app_month"] = str(0)
 
-                    if current_month > int(storage["current_app_month"]):
-                        storage["current_app_month"] = str(current_month)
+                        if current_month > int(storage["current_app_month"]):
+                            storage["current_app_month"] = str(current_month)
 
                 elif j == 1:
                     current_specialist = column
