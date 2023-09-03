@@ -249,7 +249,10 @@ def create_bar_chart_datasets(bar_data:list, bar_metric_names:list):
 
 def _display_results(sorted_by_specialist, sorted_by_class):
 
-    def get_current_records_count(dictionary_to_search) -> list:
+    def search_by_month_and_year(record):
+        return (record.month == int(storage["current_app_month"])) and (record.year == int(storage["current_app_year"]))
+
+    def get_current_records_count(dictionary_to_search, search_function=search_by_month_and_year) -> list:
 
         keys = list(dictionary_to_search)
 
@@ -261,7 +264,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
             for record in current_key_data:
 
                 # If the record matches the current month and year, count it for the current graph
-                if (record.month == int(storage["current_app_month"])) and (record.year == int(storage["current_app_year"])):
+                if search_function(record):
                     current_class_success_count += 1
                 else:
                     continue
@@ -272,29 +275,14 @@ def _display_results(sorted_by_specialist, sorted_by_class):
     
     def get_current_record_count_by_specialist(list_of_specialist_names, dictionary_to_search) -> list:
 
+        def account_for_specialist_search(record):
+            return search_by_month_and_year(record) and (record.specialist == specialist)
+
         current_data = []
 
         for specialist in list_of_specialist_names:
-            current_specialist_data = []
 
-
-            keys = list(dictionary_to_search)
-
-            for key in keys:
-                current_key_data = dictionary_to_search[key]
-                current_class_success_count = 0
-
-                for record in current_key_data:
-
-                    # If the record matches the current month and year, count it for the current graph
-                    if (record.month == int(storage["current_app_month"])) and (record.year == int(storage["current_app_year"])):
-                        current_class_success_count += 1
-                    else:
-                        continue
-
-                current_specialist_data.append(current_class_success_count)
-
-            current_data.append(current_specialist_data)
+            current_data.append(get_current_records_count(dictionary_to_search, account_for_specialist_search))
 
         return current_data
 
