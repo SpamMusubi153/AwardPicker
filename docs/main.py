@@ -115,7 +115,7 @@ def process_file():
     def add_result(record : Record):
 
         # Add the record to the sorted_by_specialist dictionary.
-        if record.specialist in sorted_by_specialist.keys():
+        if record.specialist in sorted_by_specialist:
             sorted_by_specialist[record.specialist].append(record)
 
         # If the current specialist key does not exist, create it before appending the record.
@@ -125,7 +125,7 @@ def process_file():
 
 
         # Add the result to the sorted_by_class dictionary.
-        if record.class_name in sorted_by_class.keys():
+        if record.class_name in sorted_by_class:
             sorted_by_class[record.class_name].append(record)
 
         # If the current class name key does not exist, create it before appending the record.
@@ -181,7 +181,7 @@ def process_file():
 
                         if current_month > int(storage["current_app_month"]):
                             storage["current_app_month"] = str(current_month)
-
+                        print("3B")
                 # Extract the specialist name in the second column that applies to all data in the row.
                 elif j == 1:
                     current_specialist = column
@@ -194,11 +194,11 @@ def process_file():
 
                     # Remove any extraneous spaces in the column.
                     column.replace(" ", "")
-                    
+                    print("3C")
                     # Create and save a record of the 
                     current_record = Record(current_date.month, current_date.year, current_date.day, current_specialist, column)
                     add_result(current_record)
-
+                    print("3D")
                     # Keep track of the number of classes in the data.
                     storage["number_of_classes"] = str(int(storage["number_of_classes"]) + 1)
                     print(4)
