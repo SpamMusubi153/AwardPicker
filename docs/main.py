@@ -55,11 +55,8 @@ def retrieve_file(event=None):
     def on_read_load(event):
         spreadsheet = event.target.result
 
-        print(-3)
         storage["first_graph_from_file"] = str("True")
-        print(-2)
         storage["data"] = spreadsheet
-        print(-1)
         process_file()
 
     # Read the file
@@ -99,17 +96,11 @@ def process_file():
     #                  }
     sorted_by_class = {}
 
-    print("A")
-
     assert "data" in storage, "A spreadsheet file under the \"data\" key could not be found in localstorage."
-    print("B")
+
     # Retrieve the file from localstorage and decode it into text.
     spreadsheet = storage["data"]
-    print("C")
     # spreadsheet = base64.b64decode(spreadsheet).decode("utf-8")
-
-    print(1)
-
 
     # A function to sort records into dictionaries organized by specialist and class name.
     def add_result(record : Record):
@@ -163,12 +154,8 @@ def process_file():
                 if j == 0:                
                     current_date = datetime.strptime(column, "%m/%d/%Y %H:%M:%S")
 
-                    print(2)
-
                     # If this is the first time creating a graph from the uploaded file, automatically pick the latest month and year.
                     if storage["first_graph_from_file"] == "True":
-
-                        print(3)
 
                         # Save the most recent year and month to display it in the first generated graphs. 
                         current_year = current_date.year
@@ -181,7 +168,7 @@ def process_file():
 
                         if current_month > int(storage["current_app_month"]):
                             storage["current_app_month"] = str(current_month)
-                        print("3B")
+
                 # Extract the specialist name in the second column that applies to all data in the row.
                 elif j == 1:
                     current_specialist = column
@@ -194,14 +181,11 @@ def process_file():
 
                     # Remove any extraneous spaces in the column.
                     column.replace(" ", "")
-                    print("3C")
+
                     # Create and save a record of the 
                     current_record = Record(current_date.month, current_date.year, current_date.day, current_specialist, column)
                     add_result(current_record)
-                    print("3D")
-                    print(4)
 
-    print(5)
     storage["first_graph_from_file"] = "False"
     _display_results(sorted_by_specialist, sorted_by_class)
 
