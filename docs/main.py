@@ -276,6 +276,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
     SEGMENT_BY_SPECIALIST_CHART_ID = "bySpecialistChart"
     def segment_by_specialist_graph():
         bar_labels = list(sorted_by_class.keys())
+        print(sorted_by_specialist.keys())
 
         # Retrieve data for the current month
         bar_data = get_current_record_count_by_specialist(list(sorted_by_specialist.keys()), sorted_by_class)
