@@ -199,8 +199,6 @@ def process_file():
                     current_record = Record(current_date.month, current_date.year, current_date.day, current_specialist, column)
                     add_result(current_record)
                     print("3D")
-                    # Keep track of the number of classes in the data.
-                    storage["number_of_classes"] = str(int(storage["number_of_classes"]) + 1)
                     print(4)
 
     print(5)
