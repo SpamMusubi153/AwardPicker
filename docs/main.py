@@ -106,7 +106,7 @@ def process_file():
     # Retrieve the file from localstorage and decode it into text.
     spreadsheet = storage["data"]
     print("C")
-    spreadsheet = base64.b64decode(spreadsheet).decode("utf-8")
+    # spreadsheet = base64.b64decode(spreadsheet).decode("utf-8")
 
     print(1)
 
