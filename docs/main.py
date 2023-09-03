@@ -276,14 +276,13 @@ def _display_results(sorted_by_specialist, sorted_by_class):
     SEGMENT_BY_SPECIALIST_CHART_ID = "bySpecialistChart"
     def segment_by_specialist_graph():
         bar_labels = list(sorted_by_class.keys())
-        print(sorted_by_specialist.keys())
 
         # Retrieve data for the current month
         bar_data = get_current_record_count_by_specialist(list(sorted_by_specialist.keys()), sorted_by_class)
 
         # The title of the current graph
         bar_metric_names = [f"{key} 4 or 5 Star Days" for key in list(sorted_by_specialist.keys())]
-        print(bar_metric_names)
+
         # Retrieve the full month name
         month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
 
@@ -296,7 +295,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
         # Otherwise, create the chart from scratch
         except:
             create_bar_chart(SEGMENT_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_names)
-        print(bar_data)
+
         # Update the app to display the current month and year of the chart.
         document["currentMonth"].textContent = f"{month}, {storage['current_app_year']}"
 
