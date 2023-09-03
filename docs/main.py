@@ -259,7 +259,6 @@ def _display_results(sorted_by_specialist, sorted_by_class):
     
     def get_current_record_count_by_specialist(list_of_specialist_names:list, dictionary_to_search:dict) -> list:
 
-        print(1)
         def account_for_specialist_search(record):
             return search_by_month_and_year(record) and (record.specialist == specialist)
 
@@ -268,7 +267,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
         for specialist in list_of_specialist_names:
 
             current_data.append(get_current_records_count(dictionary_to_search, account_for_specialist_search))
-        print(2)
+
         return current_data
 
 
@@ -280,13 +279,13 @@ def _display_results(sorted_by_specialist, sorted_by_class):
 
         # Retrieve data for the current month
         bar_data = get_current_record_count_by_specialist(list(sorted_by_specialist.keys()), sorted_by_class)
-        print(3)
+
         # The title of the current graph
         bar_metric_names = [f"{key} 4 or 5 Star Days" for key in list(sorted_by_specialist.keys())]
-        print(4)
+        print(bar_metric_names)
         # Retrieve the full month name
         month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
-        print(5)
+
         # If the chart already exists, update its data
         try:
             chart = window.Chart.getChart(SEGMENT_BY_SPECIALIST_CHART_ID)
@@ -296,7 +295,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
         # Otherwise, create the chart from scratch
         except:
             create_bar_chart(SEGMENT_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_names)
-        print(6)
+        print(bar_data)
         # Update the app to display the current month and year of the chart.
         document["currentMonth"].textContent = f"{month}, {storage['current_app_year']}"
 
