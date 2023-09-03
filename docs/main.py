@@ -101,7 +101,7 @@ def process_file():
 
     print("A")
 
-    assert "data" in storage.keys(), "A spreadsheet file under the \"data\" key could not be found in localstorage."
+    assert "data" in storage, "A spreadsheet file under the \"data\" key could not be found in localstorage."
     print("B")
     # Retrieve the file from localstorage and decode it into text.
     spreadsheet = storage["data"]
