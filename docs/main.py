@@ -8,6 +8,9 @@ import base64
 from browser import document, window
 from browser.local_storage import storage
 
+# TODO: Later, configure the program to automatically load previously stored data.
+window.localStorage.clear()
+
 # Variables to store results
 # Storage Format = {
 #                   Specialist Name : [List of Records],
@@ -27,7 +30,6 @@ storage["current_app_year"] = str(0)
 
 storage["number_of_classes"] = str(0)
 
-storage["data"] = ""
 
 
 def retrieve_spreadsheet(event):
@@ -177,7 +179,7 @@ def process_csv_file(spreadsheet=None):
                 if j == 0:                
                     current_date = datetime.strptime(column, "%m/%d/%Y %H:%M:%S")
 
-                    if not "data" in storage.keys():
+                    if storage["sorted_by_class_chart_created"] == "False":
                         # Save the most recent year and month to display it in the first generated graphs. 
                         current_year = current_date.year
                         current_month = current_date.month
@@ -277,7 +279,3 @@ def next_month_handler(event=None):
     process_csv_file()
 
 document["nextMonthButton"].bind("click", next_month_handler)
-
-
-# TODO: Later, configure the program to automatically load previously stored data.
-window.localStorage.clear()
