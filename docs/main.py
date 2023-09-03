@@ -55,9 +55,11 @@ def retrieve_file(event=None):
     def on_read_load(event):
         spreadsheet = event.target.result
 
+        print(-3)
         storage["first_graph_from_file"] = str("True")
+        print(-2)
         document["data"] = spreadsheet
-        
+        print(-1)
         process_file()
 
     # Read the file
