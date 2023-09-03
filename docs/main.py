@@ -277,3 +277,7 @@ def next_month_handler(event=None):
     process_csv_file()
 
 document["nextMonthButton"].bind("click", next_month_handler)
+
+
+# TODO: Later, configure the program to automatically load previously stored data.
+window.localStorage.clear()
