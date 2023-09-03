@@ -58,7 +58,7 @@ def retrieve_file(event=None):
         print(-3)
         storage["first_graph_from_file"] = str("True")
         print(-2)
-        document["data"] = spreadsheet
+        storage["data"] = spreadsheet
         print(-1)
         process_file()
 
