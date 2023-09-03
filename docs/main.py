@@ -128,7 +128,7 @@ def process_csv_file(spreadsheet=None):
 
     if "spreadsheet" in storage.keys():
         spreadsheet = storage["spreadsheet"]
-        spreadsheet = str(base64.b64decode(spreadsheet))
+        spreadsheet = base64.b64decode(spreadsheet).decode("utf-8")
 
     def add_result(record : Record):
 
