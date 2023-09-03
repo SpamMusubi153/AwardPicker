@@ -99,10 +99,13 @@ def process_file():
     #                  }
     sorted_by_class = {}
 
-    assert "data" in storage.keys(), "A spreadsheet file under the \"data\" key could not be found in localstorage."
+    print("A")
 
+    assert "data" in storage.keys(), "A spreadsheet file under the \"data\" key could not be found in localstorage."
+    print("B")
     # Retrieve the file from localstorage and decode it into text.
     spreadsheet = storage["data"]
+    print("C")
     spreadsheet = base64.b64decode(spreadsheet).decode("utf-8")
 
     print(1)
