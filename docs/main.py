@@ -294,7 +294,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
         bar_labels = list(sorted_by_class.keys())
 
         # Retrieve data for the current month
-        bar_data = get_current_record_count_by_specialist(list[sorted_by_specialist.keys()], sorted_by_class)
+        bar_data = get_current_record_count_by_specialist(list(sorted_by_specialist.keys()), sorted_by_class)
 
         # The title of the current graph
         bar_metric_names = [f"{key} 4 or 5 Star Days" for key in list(sorted_by_specialist.keys())]
