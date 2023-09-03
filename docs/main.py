@@ -270,24 +270,50 @@ def _display_results(sorted_by_specialist, sorted_by_class):
 
         return current_data
     
+    def get_current_record_count_by_specialist(list_of_specialist_names, dictionary_to_search) -> list:
+
+        current_data = []
+
+        for specialist in list_of_specialist_names:
+            current_specialist_data = []
+
+
+            keys = list(dictionary_to_search)
+
+            for key in keys:
+                current_key_data = dictionary_to_search[key]
+                current_class_success_count = 0
+
+                for record in current_key_data:
+
+                    # If the record matches the current month and year, count it for the current graph
+                    if (record.month == int(storage["current_app_month"])) and (record.year == int(storage["current_app_year"])):
+                        current_class_success_count += 1
+                    else:
+                        continue
+
+                current_specialist_data.append(current_class_success_count)
+
+            current_data.append(current_specialist_data)
+
+        return current_data
+
 
     
     # Graph the results by specialist
     SEGMENT_BY_SPECIALIST_CHART_ID = "bySpecialistChart"
     def segment_by_specialist_graph():
-        bar_labels = list(sorted_by_specialist.keys())
+        bar_labels = list(sorted_by_class.keys())
 
         # Retrieve data for the current month
-        bar_data = get_current_records_count(sorted_by_class)
+        bar_data = get_current_record_count_by_specialist(sorted_by_class)
 
         # The title of the current graph
-        bar_metric_name = "Number of 4-Star or 5-Star Days in Specialists"
+        bar_metric_names = [f"{key} 4 or 5 Star Days" for key in list(sorted_by_specialist.keys())]
 
         # Retrieve the full month name
         month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
 
-
-        
         # If the chart already exists, update its data
         try:
             chart = window.Chart.getChart(SEGMENT_BY_SPECIALIST_CHART_ID)
@@ -296,7 +322,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
 
         # Otherwise, create the chart from scratch
         except:
-            create_bar_chart(SEGMENT_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_name)
+            create_bar_chart(SEGMENT_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_names)
 
         # Update the app to display the current month and year of the chart.
         document["currentMonth"].textContent = f"{month}, {storage['current_app_year']}"
@@ -330,6 +356,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
         document["currentMonth"].textContent = f"{month}, {storage['current_app_year']}"
 
     graph_by_class()
+    segment_by_specialist_graph()
 
 
 
