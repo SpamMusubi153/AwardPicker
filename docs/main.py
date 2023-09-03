@@ -262,7 +262,6 @@ def previous_month_handler(event=None):
         storage["current_app_month"] = str(int(storage["current_app_month"]) - 1)
 
     process_csv_file()
-    display_results()
 
 document["previousMonthButton"].bind("click", previous_month_handler)
 
@@ -275,6 +274,5 @@ def next_month_handler(event=None):
         storage["current_app_month"] = str(int(storage["current_app_month"]) + 1)
 
     process_csv_file()
-    display_results()
 
 document["nextMonthButton"].bind("click", next_month_handler)
