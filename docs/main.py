@@ -399,7 +399,7 @@ def select_class_handler(event=None):
         document["selectedClass"].textContent = selected_entry
 
     else:
-        document["selectedClass"].textContent = f"Unfortunately, there were no classes to select from for the month of {storage['current_app_month']}."
+        document["selectedClass"].textContent = f"Unfortunately, there were no classes to select from for this month."
     
 
 
