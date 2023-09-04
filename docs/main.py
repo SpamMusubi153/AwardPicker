@@ -52,7 +52,8 @@ def retrieve_file(event=None):
     document["upload_label"].textContent = "Upload another spreadsheet:"
 
     # Save the date the file was last modified
-    storage["data_last_modified_date"] = document["spreadsheet_upload"].files[0]["lastModifiedDate"]
+    date_modified = datetime.strptime(document["spreadsheet_upload"].files[0]["lastModifiedDate"].split(" GMT")[0], "%a %b %d %Y %H:%M:%S")
+    storage["data_last_modified_date"] = f"This data was current as of {date_modified.strftime('%B %m, %Y')}"
     
     # Create a function to handle the processing of the file after loading.
     def on_read_load(event):
