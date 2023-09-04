@@ -436,9 +436,9 @@ if "data" in storage:
     process_file()
 
 
-def reset_app_handler(event=None):
-    window.localStorage.clear()
-    window.document.location.reload()
+# def reset_app_handler(event=None):
+#     window.localStorage.clear()
+#     window.document.location.reload()
 
-document["resetApp"].bind("click", reset_app_handler)
+# document["resetApp"].bind("click", reset_app_handler)
 
