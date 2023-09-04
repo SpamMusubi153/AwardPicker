@@ -434,3 +434,11 @@ document["upload_new_file"].bind("click", return_to_upload_handler)
 
 if "data" in storage:
     process_file()
+
+
+def reset_app_handler(event=None):
+    window.localStorage.clear()
+    document.location.reload()
+
+document["resetApp"].bind("click", reset_app_handler)
+
