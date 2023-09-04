@@ -4,7 +4,6 @@ An webapp for the Stevenson Specialist Team to Pick Monthly Class Awards
 
 [Visit the App ⤴](https://spammusubi153.github.io/AwardPicker/)
 
----
 
 ## Where did this project come from?
 
