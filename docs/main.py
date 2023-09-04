@@ -170,6 +170,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
 
     graph_by_class()
     segment_by_specialist_graph()
+    return_to_results_page()
 
 # Unfortunately, dataclasses are not implemented by Brython. This may change on a future date.
 # @dataclass
@@ -400,3 +401,14 @@ def select_class_handler(event=None):
 
 
 document["selectAClass"].bind("click", select_class_handler)
+
+def return_to_results_page(event=None):
+    document["file_upload_page"].style.display = "none"
+    document["results_page"].style.display = "block"
+
+def return_to_upload_handler(event=None):
+    document["file_upload_page"].style.display = "block"
+    document["results_page"].style.display = "none"
+
+
+document["upload_new_file"].bind("click", return_to_upload_handler)
