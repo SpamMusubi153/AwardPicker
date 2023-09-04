@@ -7,6 +7,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons" />
 
 
     <div id="file_upload_page">
@@ -72,9 +73,11 @@
                     <span class="material-symbols-outlined">
                         arrow_back_ios
                     </span>
+
+                    <p style="float: right; padding: 9px 0px 0px 0px; margin: auto;">Upload a new file</p>
+
                 </button>
 
-                <p style="float: left; padding: 9px 0px 0px 0px; margin: auto;">Upload a new file</p>
                 
             </div>
 
@@ -114,6 +117,23 @@
 
         <h2>Number of 4 or 5 Star Days per Class by Specialist</h2>
         <canvas id="bySpecialistChart"></canvas>
+
+        <br><br>
+
+        <h2>Select a 4 or 5 Star Class for this Month's Award</h2>
+        <div>
+            <button class="roundedButton" id="selectAClass">
+                <span class="material-icons-outlined">
+                    casino
+                </span>
+
+            </button>
+
+            <br>
+
+            <p>The selected class is: <strong id="selectedClass"></strong></p>
+
+        </div>
 
     </div>
 
