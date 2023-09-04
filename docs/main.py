@@ -3,7 +3,8 @@
 import string
 
 from datetime import datetime
-import base64
+# import base64
+import random
 
 from browser import document, window
 from browser.local_storage import storage
@@ -69,6 +70,106 @@ def retrieve_file(event=None):
 
 document["spreadsheet_upload"].bind("change", retrieve_file)
 
+
+def _display_results(sorted_by_specialist, sorted_by_class):
+
+    def search_by_month_and_year(record):
+        return (record.month == int(storage["current_app_month"])) and (record.year == int(storage["current_app_year"]))
+
+    def get_current_records_count(dictionary_to_search, search_function=search_by_month_and_year) -> list:
+
+        keys = list(dictionary_to_search)
+
+        current_data = []
+        for key in keys:
+            current_key_data = dictionary_to_search[key]
+            current_class_success_count = 0
+
+            for record in current_key_data:
+
+                # If the record matches the current month and year, count it for the current graph
+                if search_function(record):
+                    current_class_success_count += 1
+                else:
+                    continue
+
+            current_data.append(current_class_success_count)
+
+        return current_data
+    
+    def get_current_record_count_by_specialist(list_of_specialist_names:list, dictionary_to_search:dict) -> list:
+
+        def account_for_specialist_search(record):
+            return search_by_month_and_year(record) and (record.specialist == specialist)
+
+        current_data = []
+
+        for specialist in list_of_specialist_names:
+
+            current_data.append(get_current_records_count(dictionary_to_search, account_for_specialist_search))
+
+        return current_data
+
+
+    
+    # Graph the results by specialist
+    SEGMENT_BY_SPECIALIST_CHART_ID = "bySpecialistChart"
+    def segment_by_specialist_graph():
+        bar_labels = list(sorted_by_class.keys())
+
+        # Retrieve data for the current month
+        bar_data = get_current_record_count_by_specialist(list(sorted_by_specialist.keys()), sorted_by_class)
+
+        # The title of the current graph
+        bar_metric_names = [f"{key} 4 or 5 Star Days" for key in list(sorted_by_specialist.keys())]
+
+        # Retrieve the full month name
+        month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
+
+        # If the chart already exists, update its data
+        try:
+            chart = window.Chart.getChart(SEGMENT_BY_SPECIALIST_CHART_ID)
+            chart.data.datasets[0].data = bar_data
+            chart.update()
+
+        # Otherwise, create the chart from scratch
+        except:
+            create_bar_chart(SEGMENT_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_names)
+
+        # Update the app to display the current month and year of the chart.
+        document["currentMonth"].textContent = f"{month}, {storage['current_app_year']}"
+
+
+    # Graph the results by class
+    SORTED_BY_CLASS_CHART_ID = "byClassChart"
+    def graph_by_class():
+        bar_labels = list(sorted_by_class.keys())
+
+        # Retrieve data for the current month
+        bar_data = get_current_records_count(sorted_by_class)
+
+        # The title of the current graph
+        bar_metric_name = "Number of 4 or 5-Star Days in Specialists"
+
+        # Retrieve the full month name
+        month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
+
+        # If the chart already exists, update its data
+        try:
+            chart = window.Chart.getChart(SORTED_BY_CLASS_CHART_ID)
+            chart.data.datasets[0].data = bar_data
+            chart.update()
+
+        # Otherwise, create the chart from scratch
+        except:
+            create_bar_chart(SORTED_BY_CLASS_CHART_ID, bar_labels, [bar_data], [bar_metric_name])
+
+        # Update the app to display the current month and year of the chart.
+        document["currentMonth"].textContent = f"{month}, {storage['current_app_year']}"
+
+    graph_by_class()
+    segment_by_specialist_graph()
+
 # Unfortunately, dataclasses are not implemented by Brython. This may change on a future date.
 # @dataclass
 class Record:
@@ -85,7 +186,7 @@ class Record:
         self.specialist = specialist
         self.class_name = class_name 
 
-def process_file():
+def process_file(event=None, callback=_display_results):
 
     # Variables to store results
     # Storage Format = {
@@ -190,7 +291,7 @@ def process_file():
                     add_result(current_record)
 
     storage["first_graph_from_file"] = "False"
-    _display_results(sorted_by_specialist, sorted_by_class)
+    callback(sorted_by_specialist, sorted_by_class)
 
 
 def create_bar_chart(canvas_id, bar_labels, bar_data:list, bar_metric_names:list):
@@ -233,108 +334,6 @@ def create_bar_chart_datasets(bar_data:list, bar_metric_names:list):
 
     return dataset
 
-
-def _display_results(sorted_by_specialist, sorted_by_class):
-
-    def search_by_month_and_year(record):
-        return (record.month == int(storage["current_app_month"])) and (record.year == int(storage["current_app_year"]))
-
-    def get_current_records_count(dictionary_to_search, search_function=search_by_month_and_year) -> list:
-
-        keys = list(dictionary_to_search)
-
-        current_data = []
-        for key in keys:
-            current_key_data = dictionary_to_search[key]
-            current_class_success_count = 0
-
-            for record in current_key_data:
-
-                # If the record matches the current month and year, count it for the current graph
-                if search_function(record):
-                    current_class_success_count += 1
-                else:
-                    continue
-
-            current_data.append(current_class_success_count)
-
-        return current_data
-    
-    def get_current_record_count_by_specialist(list_of_specialist_names:list, dictionary_to_search:dict) -> list:
-
-        def account_for_specialist_search(record):
-            return search_by_month_and_year(record) and (record.specialist == specialist)
-
-        current_data = []
-
-        for specialist in list_of_specialist_names:
-
-            current_data.append(get_current_records_count(dictionary_to_search, account_for_specialist_search))
-
-        return current_data
-
-
-    
-    # Graph the results by specialist
-    SEGMENT_BY_SPECIALIST_CHART_ID = "bySpecialistChart"
-    def segment_by_specialist_graph():
-        bar_labels = list(sorted_by_class.keys())
-
-        # Retrieve data for the current month
-        bar_data = get_current_record_count_by_specialist(list(sorted_by_specialist.keys()), sorted_by_class)
-
-        # The title of the current graph
-        bar_metric_names = [f"{key} 4 or 5 Star Days" for key in list(sorted_by_specialist.keys())]
-
-        # Retrieve the full month name
-        month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
-
-        # If the chart already exists, update its data
-        try:
-            chart = window.Chart.getChart(SEGMENT_BY_SPECIALIST_CHART_ID)
-            chart.data.datasets[0].data = bar_data
-            chart.update()
-
-        # Otherwise, create the chart from scratch
-        except:
-            create_bar_chart(SEGMENT_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_names)
-
-        # Update the app to display the current month and year of the chart.
-        document["currentMonth"].textContent = f"{month}, {storage['current_app_year']}"
-
-
-    # Graph the results by class
-    SORTED_BY_CLASS_CHART_ID = "byClassChart"
-    def graph_by_class():
-        bar_labels = list(sorted_by_class.keys())
-
-        # Retrieve data for the current month
-        bar_data = get_current_records_count(sorted_by_class)
-
-        # The title of the current graph
-        bar_metric_name = "Number of 4 or 5-Star Days in Specialists"
-
-        # Retrieve the full month name
-        month = datetime(int(storage['current_app_year']), int(storage['current_app_month']), 1).strftime("%B")
-
-        # If the chart already exists, update its data
-        try:
-            chart = window.Chart.getChart(SORTED_BY_CLASS_CHART_ID)
-            chart.data.datasets[0].data = bar_data
-            chart.update()
-
-        # Otherwise, create the chart from scratch
-        except:
-            create_bar_chart(SORTED_BY_CLASS_CHART_ID, bar_labels, [bar_data], [bar_metric_name])
-
-        # Update the app to display the current month and year of the chart.
-        document["currentMonth"].textContent = f"{month}, {storage['current_app_year']}"
-
-    graph_by_class()
-    segment_by_specialist_graph()
-
-
-
 def previous_month_handler(event=None):
     if int(storage["current_app_month"]) == 1:
         storage["current_app_month"] = "12"
@@ -358,3 +357,37 @@ def next_month_handler(event=None):
     process_file()
 
 document["nextMonthButton"].bind("click", next_month_handler)
+
+
+def select_class_handler(event=None):
+
+    def process_data(class_names, class_count):
+        all_entries = []
+
+        for i, class_name in enumerate(class_names):
+
+            for j in range(class_count[i]):
+                all_entries.append(class_name)
+
+        return all_entries
+    
+    def retrieve_data():
+        SEGMENT_BY_SPECIALIST_CHART_ID = "bySpecialistChart"
+        chart = window.Chart.getChart(SEGMENT_BY_SPECIALIST_CHART_ID)
+        class_names = chart.data.labels
+        class_count = chart.data.datasets[0].data
+
+        return class_names, class_count
+        
+        
+    class_names, class_count = retrieve_data
+    all_entries = process_data(class_names, class_count)
+
+    print(all_entries)
+
+    selected_entry = all_entries[random.randint(0, len(all_entries) - 1)]
+
+    document["selectedClass"].textContent = selected_entry
+
+
+document["selectAClass"].bind("click", select_class_handler)
