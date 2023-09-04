@@ -135,6 +135,12 @@ def _display_results(sorted_by_specialist, sorted_by_class):
 
         # Otherwise, create the chart from scratch
         except:
+            # Try to destroy the chart if it exists
+            try:
+                chart = window.Chart.getChart(SEGMENT_BY_SPECIALIST_CHART_ID)
+                chart.destroy()
+            except:
+                pass
             create_bar_chart(SEGMENT_BY_SPECIALIST_CHART_ID, bar_labels, bar_data, bar_metric_names)
 
         # Update the app to display the current month and year of the chart.
@@ -163,6 +169,12 @@ def _display_results(sorted_by_specialist, sorted_by_class):
 
         # Otherwise, create the chart from scratch
         except:
+            # Try to destroy the chart if it exists
+            try:
+                chart = window.Chart.getChart(SORTED_BY_CLASS_CHART_ID)
+                chart.destroy()
+            except:
+                pass
             create_bar_chart(SORTED_BY_CLASS_CHART_ID, bar_labels, [bar_data], [bar_metric_name])
 
         # Update the app to display the current month and year of the chart.
