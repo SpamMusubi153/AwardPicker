@@ -130,7 +130,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
         try:
             chart = window.Chart.getChart(SEGMENT_BY_SPECIALIST_CHART_ID)
             for i, dataset in bar_data:
-                chart.data.datasets[0].data[i] = dataset
+                chart.data.datasets[i] = dataset
             chart.update()
 
         # Otherwise, create the chart from scratch
