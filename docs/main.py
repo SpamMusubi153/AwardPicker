@@ -412,3 +412,10 @@ def return_to_upload_handler(event=None):
 
 
 document["upload_new_file"].bind("click", return_to_upload_handler)
+
+
+
+# Navigate to the results page on load if a previously uploaded file can be detected.
+
+if "data" in storage:
+    process_file()
