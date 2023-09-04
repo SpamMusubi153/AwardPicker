@@ -438,7 +438,7 @@ if "data" in storage:
 
 def reset_app_handler(event=None):
     window.localStorage.clear()
-    document.location.reload()
+    window.document.location.reload()
 
 document["resetApp"].bind("click", reset_app_handler)
 
