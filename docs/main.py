@@ -344,6 +344,8 @@ def previous_month_handler(event=None):
         storage["current_app_month"] = str(int(storage["current_app_month"]) - 1)
 
     process_file()
+    # Clear any error or selected class from the previous month
+    document["selectedClass"].textContent = ""
 
 document["previousMonthButton"].bind("click", previous_month_handler)
 
@@ -356,6 +358,9 @@ def next_month_handler(event=None):
         storage["current_app_month"] = str(int(storage["current_app_month"]) + 1)
 
     process_file()
+
+    # Clear any error or selected class from the previous month
+    document["selectedClass"].textContent = ""
 
 document["nextMonthButton"].bind("click", next_month_handler)
 
