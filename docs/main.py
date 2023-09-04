@@ -380,7 +380,7 @@ def select_class_handler(event=None):
         return class_names, class_count
         
         
-    class_names, class_count = retrieve_data
+    class_names, class_count = retrieve_data()
     all_entries = process_data(class_names, class_count)
 
     print(all_entries)
