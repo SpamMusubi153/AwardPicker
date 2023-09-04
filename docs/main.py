@@ -53,7 +53,7 @@ def retrieve_file(event=None):
 
     # Save the date the file was last modified
     date_modified = datetime.strptime(document["spreadsheet_upload"].files[0]["lastModifiedDate"].toString().split(" GMT")[0], "%a %b %d %Y %H:%M:%S")
-    document["file_current_as_of_time"].textContent = f"This data was current as of {date_modified.strftime('%B %m, %Y')}"
+    storage["file_current_as_of_time"] = f"This data was current as of {date_modified.strftime('%B %m, %Y')}"
     
     # Create a function to handle the processing of the file after loading.
     def on_read_load(event):
@@ -170,6 +170,9 @@ def _display_results(sorted_by_specialist, sorted_by_class):
 
     graph_by_class()
     segment_by_specialist_graph()
+    
+    document["file_current_as_of_time"].textContent = storage["file_current_as_of_time"]
+
     return_to_results_page()
 
 # Unfortunately, dataclasses are not implemented by Brython. This may change on a future date.
