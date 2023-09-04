@@ -367,7 +367,7 @@ def select_class_handler(event=None):
 
         for i, class_name in enumerate(class_names):
 
-            for j in range(class_count[i]):
+            for j in range(0, class_count[i]):
                 all_entries.append(class_name)
 
         return all_entries
