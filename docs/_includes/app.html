@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 
-    
-
-
     <div id="file_upload_page">
 
         <h3 id="upload-a-spreadsheet-that-contains-the-names-of-your-4-star-classes">Upload a spreadsheet that contains the names of your 4-Star classes.</h3>
@@ -71,42 +68,41 @@
 
             <div class="pageControl">
                 
-                <button class="roundedButton" id="upload_new_file" style="float: left;">
+                <button class="navigationButton" id="upload_new_file" style="float: left;">
                     <span class="material-symbols-outlined">
                         arrow_back_ios
                     </span>
                 </button>
 
-                <p style="float: right; padding: 10px 0px 0px 10px; margin: auto;">Upload a new file</p>
+                <p style="float: left; padding: 9px 0px 0px 0px; margin: auto;">Upload a new file</p>
                 
             </div>
 
-            <div style="float: right; margin: auto; padding: 10px 0px 0px 10px;">
+            <div style="float: right; margin: auto; padding: 5px 20px 0px 10px;">
                 <p id="file_current_as_of_time">Loading...</p>
             
             </div>
 
-            <br>
+        </div>
 
-            <div class="navigationMenu">
-                <button class="roundedButton" id="previousMonthButton">
-                    <span class="material-symbols-outlined">
-                        arrow_back_ios
-                    </span>
-                </button>
+        <br><br>
 
-                <span class="currentMonth" id="currentMonth">
-                    Loading Data...
+        <div class="navigationMenu">
+            <button class="roundedButton" id="previousMonthButton">
+                <span class="material-symbols-outlined">
+                    arrow_back_ios
                 </span>
+            </button>
 
-                <button class="roundedButton" id="nextMonthButton">
-                    <span class="material-symbols-outlined">
-                        arrow_forward_ios
-                    </span>
-                </button>
+            <span class="currentMonth" id="currentMonth">
+                Loading Data...
+            </span>
 
-            </div>
-
+            <button class="roundedButton" id="nextMonthButton">
+                <span class="material-symbols-outlined">
+                    arrow_forward_ios
+                </span>
+            </button>
 
         </div>
 

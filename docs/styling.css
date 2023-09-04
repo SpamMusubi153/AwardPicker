@@ -44,3 +44,15 @@ summary {
 .navigationMenu .currentMonth {
     padding: 10px 10px;
 }
+
+.navigationMenu {
+    text-align: center;
+}
+
+
+.navigationButton {
+    background-color: transparent;
+    border-radius: 20%;
+    padding: 10px 15px;
+    border: none;
+}
