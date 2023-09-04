@@ -44,7 +44,6 @@ def retrieve_file(event=None):
     if not (document["spreadsheet_upload"].files[0].type == "text/csv"):
         display_file_error("Unfortunately, the file you uploaded wasn't a CSV.", "Try opening your file in Excel and exporting it as a CSV (Comma Separated Values) file.")
         return
-    
 
     # By this point, the file should have passed all tests.
     document["file_error_dialog"].style.display = "none"
@@ -53,7 +52,7 @@ def retrieve_file(event=None):
 
     # Save the date the file was last modified
     date_modified = datetime.strptime(document["spreadsheet_upload"].files[0]["lastModifiedDate"].toString().split(" GMT")[0], "%a %b %d %Y %H:%M:%S")
-    storage["data_last_modified_date"] = f"This data was current as of {date_modified.strftime('%B %m, %Y')}"
+    document["file_current_as_of_time"] = f"This data was current as of {date_modified.strftime('%B %m, %Y')}"
     
     # Create a function to handle the processing of the file after loading.
     def on_read_load(event):
