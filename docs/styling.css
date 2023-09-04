@@ -33,7 +33,7 @@ summary {
 .menuBar {
     display: block;
     margin: auto;
-    width: 50%;
+    /* width: 50%; */
     text-align: center;
 }
 
