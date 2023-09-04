@@ -384,11 +384,14 @@ def select_class_handler(event=None):
     class_names, class_count = retrieve_data()
     all_entries = process_data(class_names, class_count)
 
-    print(all_entries)
+    if len(all_entries) > 0:
 
-    selected_entry = all_entries[random.randint(0, len(all_entries) - 1)]
+        selected_entry = all_entries[random.randint(0, len(all_entries) - 1)]
+        document["selectedClass"].textContent = selected_entry
 
-    document["selectedClass"].textContent = selected_entry
+    else:
+        document["selectedClass"].textContent = f"Unfortunately, there were no classes to select from for the month of {storage['current_app_month']}."
+    
 
 
 document["selectAClass"].bind("click", select_class_handler)
