@@ -212,9 +212,9 @@ def create_bar_chart(canvas_id, bar_labels, bar_data:list, bar_metric_names:list
                     "beginAtZero" : True
                 },
 
-                "yAxes": {
-                    "stepSize": 1
-                }
+                # "yAxes": {
+                #     "stepSize": 1
+                # }
             }
         }
     })
