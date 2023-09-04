@@ -129,7 +129,7 @@ def _display_results(sorted_by_specialist, sorted_by_class):
         # If the chart already exists, update its data
         try:
             chart = window.Chart.getChart(SEGMENT_BY_SPECIALIST_CHART_ID)
-            for i, dataset in bar_data:
+            for i, dataset in enumerate(bar_data):
                 chart.data.datasets[i].data = dataset
             chart.update()
 
