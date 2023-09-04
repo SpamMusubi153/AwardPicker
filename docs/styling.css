@@ -30,17 +30,17 @@ summary {
 }
 
 
-.monthSelector {
+.menuBar {
     display: block;
     margin: auto;
     width: 50%;
     text-align: center;
 }
 
-.results {
+.resultsPage {
     margin: auto;
 }
 
-.monthSelector .currentMonth {
+.navigationMenu .currentMonth {
     padding: 10px 10px;
 }

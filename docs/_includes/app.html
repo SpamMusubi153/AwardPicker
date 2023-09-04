@@ -3,11 +3,21 @@
     <!-- Display an error over the top of the file upload box. -->
 
     <script id=app type="text/python" src="/AwardPicker/main.py"></script>
+    <link rel="stylesheet" href="styling.css">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 
-    <div>
+    
+
+
+    <div id="file_upload_page">
+
+        <h3 id="upload-a-spreadsheet-that-contains-the-names-of-your-4-star-classes">Upload a spreadsheet that contains the names of your 4-Star classes.</h3>
+
+        <br>
+
         <div id="file_error_dialog" style="display:none;">
             <h3 id="file_error_message">Unfortunately, this file won't work!</h3>
             <p id="file_error_remedy">We're having trouble figuring out what the error is. Try making a copy of the file in Excel that only contains data from the most recent month.</p>
@@ -22,30 +32,79 @@
 
         <input type="file" id="spreadsheet_upload" name="spreadsheet">
 
+        <br><br>
+
+        <details>
+
+            <summary><span>🔽</span><strong>Need some help?</strong></summary>
+        
+            <br>
+        
+            <h4 id="make-sure-that">Make sure that:</h4>
+        
+            <ul>
+                <li>Each row contains a date and a class name, followed by the names of 4-Star classes</li>
+                <li>The date is in the format MM/DD/YYYY HH:MM:SS, which is the format provided automatically by Google Forms</li>
+                <li>Your spreadsheet is in the CSV (Comma Separated Values) Format</li>
+                <li>No data value contains the comma (,) character</li>
+            </ul>
+        
+            <h4 id="heres-an-example-of-what-your-spreadsheet-could-look-like">Here’s an example of what your spreadsheet could look like:</h4>
+        
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4-StarClasses.csv
+                9/1/2023 10:01:10,Library,Wong
+                9/7/2023 14:51:12,Art,Wong,Tree
+                9/1/2023 9:19:43,Library,Wong,Light,Book
+                ...
+            </code></pre></div></div>
+        
+            </details>
+
     </div>
 
     <br><br>
 
-    <div id="results" class="results">
+    <div id="results_page" class="resultsPage">
 
         <!-- A navigation bar to toggle between different months -->
-        <div class="monthSelector" id="monthSelector">
+        <div class="menuBar">
 
-            <button class="roundedButton" id="previousMonthButton">
-                <span class="material-symbols-outlined">
-                    arrow_back_ios
+            <div style="float: left;">
+                
+                <button class="roundedButton" id="upload_new_file">
+                    <span class="material-symbols-outlined">
+                        arrow_back_ios
+                    </span>
+                </button>
+
+                <p>Upload a new file</p>
+                
+            </div>
+
+            <div style="float: right">
+                <p></p>
+            
+            </div>
+
+
+            <div class="navigationMenu">
+                <button class="roundedButton" id="previousMonthButton">
+                    <span class="material-symbols-outlined">
+                        arrow_back_ios
+                    </span>
+                </button>
+
+                <span class="currentMonth" id="currentMonth">
+                    Loading Data...
                 </span>
-            </button>
 
-            <span class="currentMonth" id="currentMonth">
-                Loading Data...
-            </span>
+                <button class="roundedButton" id="nextMonthButton">
+                    <span class="material-symbols-outlined">
+                        arrow_forward_ios
+                    </span>
+                </button>
 
-            <button class="roundedButton" id="nextMonthButton">
-                <span class="material-symbols-outlined">
-                    arrow_forward_ios
-                </span>
-            </button>
+            </div>
 
 
         </div>
@@ -60,7 +119,6 @@
         <canvas id="bySpecialistChart"></canvas>
 
     </div>
-
 
 </div>
 

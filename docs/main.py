@@ -50,6 +50,9 @@ def retrieve_file(event=None):
     document["file_error_dialog"].style.display = "none"
     document["file_success"].style.display = "block"
     document["upload_label"].textContent = "Upload another spreadsheet:"
+
+    # Save the date the file was last modified
+    storage["data_last_modified_date"] = document["spreadsheet_upload"].files[0]["lastModifiedDate"]
     
     # Create a function to handle the processing of the file after loading.
     def on_read_load(event):
